@@ -1,5 +1,6 @@
 package com.example.shawasssisignment1;
 
+import static android.support.test.espresso.action.ViewActions.pressImeActionButton;
 import static org.junit.Assert.*;
 
 import android.support.test.InstrumentationRegistry;
@@ -18,7 +19,7 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-
+@RunWith(AndroidJUnit4.class)
 
 public class MainActivityTest {
     @Rule
@@ -26,21 +27,31 @@ public class MainActivityTest {
             = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void text() {
+    public void text1() {
         onView(withId(R.id.myNameText))
                 .check(matches(withText(R.string.myName)));
-
-//        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
-//
-//        onView(withText(R.string.say_bye))
-//                .perform(click());
-//
-//        onView(withId(R.id.hello_world_text))
-//                .check(matches(withText(R.string.say_bye)));
     }
+
+    @Test
+    public void text2() {
+        onView(withId(R.id.touchCharlie))
+                .check(matches(withText(R.string.touch_winchester)));
+    }
+
+//    @Test
+//    public void click() {
+//        onView(withId(R.id.winCharlie))
+//                .perform(click());
+//    }
+
 
     @Before
     public void setUp() {
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @After

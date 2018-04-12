@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
         final ImageButton button = findViewById(R.id.winCharlie);
 
-        //creates audio object
         final MediaPlayer bang = MediaPlayer.create(this, R.raw.bang);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
