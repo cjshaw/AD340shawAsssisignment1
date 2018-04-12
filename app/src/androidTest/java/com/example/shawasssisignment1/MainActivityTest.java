@@ -38,20 +38,15 @@ public class MainActivityTest {
                 .check(matches(withText(R.string.touch_winchester)));
     }
 
-//    @Test
-//    public void click() {
-//        onView(withId(R.id.winCharlie))
-//                .perform(click());
-//    }
+    @Test
+    public void onClick() {
+        onView(withId(R.id.winCharlie))
+                .perform(click());
+    }
 
 
     @Before
     public void setUp() {
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
     }
 
     @After
