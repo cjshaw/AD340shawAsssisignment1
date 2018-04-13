@@ -1,4 +1,7 @@
 apply plugin: 'jacoco'
+jacoco {
+    toolVersion = "0.7.9"
+}
 def coverageSourceDirs = [
         'src/main/java',
         'src/debug/java'
