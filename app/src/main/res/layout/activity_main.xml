@@ -1,41 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relativeLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
 
     <TextView
-        android:id="@+id/myNameText"
-        android:layout_width="wrap_content"
+        android:id="@+id/header"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/myName"
+        android:paddingBottom="10dp"
+        android:layout_marginStart="240dp"
+        android:text="@string/heading" />
 
- />
-
-    <TextView
-        android:id="@+id/touchCharlie"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/usernameEdit"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/touch_winchester"
-        app:layout_constraintBottom_toTopOf="@+id/winCharlie"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-
-
+        android:hint="@string/enter_username"
         />
 
-    <ImageButton
-        android:id="@+id/winCharlie"
-        android:layout_width="@dimen/imgButtonW"
-        android:layout_height="@dimen/imgButtonH"
-        android:background="@drawable/winchester_charlie"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
- />
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/username"
+        android:textSize="24.0dp"
+        android:paddingBottom="10dp"
+        android:textStyle="bold"
+        />
 
-</android.support.constraint.ConstraintLayout>
+    <EditText
+        android:id="@+id/nameEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_name"
+        />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
+        android:textSize="24.0dp"
+        android:paddingBottom="10dp"
+        android:textStyle="bold"
+        />
+    <EditText
+        android:id="@+id/emailEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_email"/>
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/email_address"
+        android:textSize="24.0dp"
+        android:paddingBottom="10dp"
+        android:textStyle="bold"
+        />
+
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onSubmit"
+        android:text="@string/submit"
+        />
+
+</LinearLayout>

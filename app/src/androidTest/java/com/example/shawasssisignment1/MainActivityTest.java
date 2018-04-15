@@ -26,33 +26,5 @@ public class MainActivityTest {
     public ActivityTestRule<MainActivity> activityTestRule
             = new ActivityTestRule<>(MainActivity.class);
 
-    @Test
-    public void text1() {
-        onView(withId(R.id.myNameText))
-                .check(matches(withText(R.string.myName)));
-    }
 
-    @Test
-    public void text2() {
-        onView(withId(R.id.touchCharlie))
-                .check(matches(withText(R.string.touch_winchester)));
-    }
-
-    @Test
-    public void onClick() {
-        onView(withId(R.id.winCharlie))
-                .perform(click());
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
-    @Test
-    public void onCreate() {
-    }
 }
