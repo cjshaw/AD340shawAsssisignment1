@@ -13,8 +13,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.Date;
-
 public class MainActivity extends AppCompatActivity {
 
     private TextView header;
@@ -25,12 +23,10 @@ public class MainActivity extends AppCompatActivity {
     private EditText editEmail;
     private TextView username;
     private EditText editUsername;
+    private Button birthdayEdit;
     private TextView birthdayDate;
     private DatePickerDialog.OnDateSetListener dateSetListener;
-    private int month;
-    private int day;
-    private int year;
-
+    private Calendar myCal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,62 +42,76 @@ public class MainActivity extends AppCompatActivity {
         editEmail = findViewById(R.id.emailEdit);
         submitBtn = findViewById(R.id.submitBtn);
         birthdayDate = findViewById(R.id.birthday);
+        birthdayEdit = findViewById(R.id.birthdayEdit);
 
 
     }
 
 
-    public int getCalendar(View v) {
+    public void getCalendar(View v) {
         Calendar cal = Calendar.getInstance();
-        year = cal.get(Calendar.YEAR);
-        month = cal.get(Calendar.MONTH);
-        day = cal.get(Calendar.DAY_OF_MONTH);
-
-
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        final int day = cal.get(Calendar.DAY_OF_MONTH);
+        myCal = Calendar.getInstance();
         DatePickerDialog dialog = new DatePickerDialog(
                 MainActivity.this,
                 android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                 dateSetListener, year, month, day);
-        dialog.getWindow();
         dialog.show();
-        month = month +1;
+        month = month + 1;
 
         dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month = month +1;
+                month = month + 1;
+                myCal.set(Calendar.YEAR, year);
+                myCal.set(Calendar.MONTH, month);
+                myCal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
                 String date = month + "/" + dayOfMonth + "/" + year;
-                birthdayDate.setText(date);
+                birthdayEdit.setText(date);
             }
         };
-        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-        int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
-        int age = 0;
-        if(currentYear - year >= 18 && currentMonth >= month && currentDay >= day){
-            age = currentYear - year;
-        } else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-// Add the buttons
-            builder.setNeutralButton(R.string.ok, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    // User clicked OK button
-                }
-            });
-// Set other dialog properties
 
-// Create the AlertDialog
-            AlertDialog alertDialog = builder.create();
-        }
-        return age;
     }
 
     public void onSubmit(View v) {
-        Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-        intent.putExtra(Constants.KEY_NAME, editName.getText().toString());
-        intent.putExtra(Constants.KEY_EMAIL, editEmail.getText().toString());
-        intent.putExtra(Constants.KEY_USERNAME, editUsername.getText().toString());
-        startActivity(intent);
+        if (!editUsername.getText().toString().isEmpty() && getAge() > 18) {
+            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+            intent.putExtra(Constants.KEY_USERNAME, editUsername.getText().toString());
+            intent.putExtra(Constants.KEY_AGE, getAge());
+            startActivity(intent);
+        } else if (editUsername.getText().toString().isEmpty()){
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+            builder1.setMessage("You must enter have a username is join this club.");
+            builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+            builder1.show();
+        } else if (getAge() < 18) {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+            builder1.setMessage("You must 18 or older, kiddo.");
+            builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+            builder1.show();
+        }
+    }
+
+    public int getAge() {
+        Calendar today = Calendar.getInstance();
+
+        int age = today.get(Calendar.YEAR) - this.myCal.get(Calendar.YEAR);
+
+        if (today.get(Calendar.DAY_OF_YEAR) < myCal.get(Calendar.DAY_OF_YEAR)){
+            age--;
+        }
+        return age;
     }
 
     @Override

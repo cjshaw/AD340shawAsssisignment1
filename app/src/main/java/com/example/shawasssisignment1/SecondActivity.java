@@ -21,19 +21,15 @@ public class SecondActivity extends AppCompatActivity {
         Bundle b = intent.getExtras();
 
         assert b != null;
-        if(b.containsKey(Constants.KEY_NAME)) {
-            String name = b.getString(Constants.KEY_NAME);
-            msg.append(name).append("\n");
-        }
 
         if(b.containsKey(Constants.KEY_USERNAME)){
             String username = b.getString(Constants.KEY_USERNAME);
             msg.append(username).append("\n");
         }
 
-        if(b.containsKey(Constants.KEY_EMAIL)){
-            String email = b.getString(Constants.KEY_EMAIL);
-            msg.append(email);
+        if(b.containsKey(Constants.KEY_AGE)){
+            int age = b.getInt(Constants.KEY_AGE);
+            msg.append("Your age is ").append(age);
         }
 
         textView.setText(msg);

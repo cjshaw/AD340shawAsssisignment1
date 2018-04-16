@@ -53,6 +53,7 @@
         android:paddingBottom="10dp"
         android:textStyle="bold"
         />
+
     <EditText
         android:id="@+id/emailEdit"
         android:layout_width="match_parent"
@@ -71,6 +72,15 @@
         android:textStyle="bold"
         />
 
+    <Button
+        android:id="@+id/birthdayEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="getCalendar"
+        android:hint="@string/birthday"
+        android:inputType="none"
+        />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -80,7 +90,6 @@
         android:textStyle="bold"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:onClick="getCalendar"
         />
 
     <Button
