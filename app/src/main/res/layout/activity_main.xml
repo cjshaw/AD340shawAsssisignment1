@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/enter_username"
+        android:inputType="text"
         />
 
     <TextView
@@ -40,6 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/enter_name"
+        android:inputType="text"
         />
 
     <TextView
@@ -55,7 +57,9 @@
         android:id="@+id/emailEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/enter_email"/>
+        android:hint="@string/enter_email"
+        android:inputType="textWebEmailAddress"
+        />
 
     <TextView
         android:id="@+id/email"
@@ -78,14 +82,6 @@
         android:paddingBottom="10dp"
         android:onClick="getCalendar"
         />
-
-    <!--<ImageView-->
-        <!--android:id="@+id/birthday"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="ic_calendar"-->
-        <!--android:onClick="getCalendar"-->
-        <!--/>-->
 
     <Button
         android:id="@+id/submitBtn"

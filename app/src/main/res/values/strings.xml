@@ -10,5 +10,6 @@
     <string name="enter_email">Enter email...</string>
     <string name="birthday">Enter your birthday...</string>
     <string name="date_of_birth">Your Date of Birth</string>
+    <string name="ok">ok</string>
 
 </resources>

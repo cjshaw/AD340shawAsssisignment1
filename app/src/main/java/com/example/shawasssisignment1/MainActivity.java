@@ -1,9 +1,9 @@
 package com.example.shawasssisignment1;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Date;
@@ -28,8 +27,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText editUsername;
     private TextView birthdayDate;
     private DatePickerDialog.OnDateSetListener dateSetListener;
-    private String date;
-    private TextView calendar;
+    private int month;
+    private int day;
+    private int year;
 
 
     @Override
@@ -45,38 +45,62 @@ public class MainActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         editEmail = findViewById(R.id.emailEdit);
         submitBtn = findViewById(R.id.submitBtn);
-        calendar = findViewById(R.id.birthday);
+        birthdayDate = findViewById(R.id.birthday);
 
 
     }
 
 
-    public void getCalendar(View v) {
+    public int getCalendar(View v) {
         Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        int day = cal.get(Calendar.DAY_OF_MONTH);
+        year = cal.get(Calendar.YEAR);
+        month = cal.get(Calendar.MONTH);
+        day = cal.get(Calendar.DAY_OF_MONTH);
+
 
         DatePickerDialog dialog = new DatePickerDialog(
                 MainActivity.this,
                 android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                 dateSetListener, year, month, day);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow();
         dialog.show();
+        month = month +1;
+
         dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month = month+1;
-                date = month + "/" + dayOfMonth + "/" + year;
+                month = month +1;
+                String date = month + "/" + dayOfMonth + "/" + year;
                 birthdayDate.setText(date);
             }
         };
-    }
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+        int age = 0;
+        if(currentYear - year >= 18 && currentMonth >= month && currentDay >= day){
+            age = currentYear - year;
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+// Add the buttons
+            builder.setNeutralButton(R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    // User clicked OK button
+                }
+            });
+// Set other dialog properties
 
+// Create the AlertDialog
+            AlertDialog alertDialog = builder.create();
+        }
+        return age;
+    }
 
     public void onSubmit(View v) {
         Intent intent = new Intent(MainActivity.this, SecondActivity.class);
         intent.putExtra(Constants.KEY_NAME, editName.getText().toString());
+        intent.putExtra(Constants.KEY_EMAIL, editEmail.getText().toString());
+        intent.putExtra(Constants.KEY_USERNAME, editUsername.getText().toString());
         startActivity(intent);
     }
 
