@@ -67,6 +67,22 @@
         android:textStyle="bold"
         />
 
+    <EditText
+        android:id="@+id/birthdayEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="getCalendar"
+        android:text="@string/birthday"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24.0dp"
+        android:id="@+id/birthday"
+        android:text="@string/date_of_birth"
+        />
+
     <Button
         android:id="@+id/submitBtn"
         android:layout_width="wrap_content"

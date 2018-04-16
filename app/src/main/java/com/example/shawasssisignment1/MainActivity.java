@@ -1,6 +1,10 @@
 package com.example.shawasssisignment1;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.icu.util.Calendar;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,7 +26,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText editEmail;
     private TextView username;
     private EditText editUsername;
-
+    private TextView birthdayDate;
+    private EditText birthdayEdit;
+    private DatePickerDialog.OnDateSetListener dateSetListener;
 
 
     @Override
@@ -36,9 +44,26 @@ public class MainActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         editEmail = findViewById(R.id.emailEdit);
         submitBtn = findViewById(R.id.submitBtn);
-
-
+        birthdayDate = findViewById(R.id.birthday);
+        birthdayEdit = findViewById(R.id.birthdayEdit);
+        
     }
+
+
+    public void getCalendar(View v) {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog dialog = new DatePickerDialog(
+                MainActivity.this,
+                android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                dateSetListener, year, month, day);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+    }
+
 
     public void onSubmit(View v) {
         Intent intent = new Intent(MainActivity.this, SecondActivity.class);
@@ -62,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
         outState.putString(Constants.KEY_NAME, name.getText().toString());
         outState.putString(Constants.KEY_BUTTON_TXT, submitBtn.getText().toString());
     }
