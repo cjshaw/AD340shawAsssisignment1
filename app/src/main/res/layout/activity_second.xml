@@ -15,9 +15,10 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="25dp"
         android:id="@+id/backBtn"
         android:text="@string/go_back"
-        android:layout_alignBaseline="@id/textView"
         android:onClick="goBack"
         />
 </RelativeLayout>

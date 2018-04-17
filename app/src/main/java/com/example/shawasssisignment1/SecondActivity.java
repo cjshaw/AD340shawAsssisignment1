@@ -20,7 +20,7 @@ public class SecondActivity extends AppCompatActivity {
         textView = findViewById(R.id.textView);
         backBtn = findViewById(R.id.backBtn);
 
-        StringBuilder msg = new StringBuilder("Hello \n");
+        StringBuilder msg = new StringBuilder("Thanks for Signing Up  \n");
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
 
@@ -28,14 +28,8 @@ public class SecondActivity extends AppCompatActivity {
 
         if(b.containsKey(Constants.KEY_USERNAME)){
             String username = b.getString(Constants.KEY_USERNAME);
-            msg.append(username).append("\n");
+            msg.append(username).append("!");
         }
-
-        if(b.containsKey(Constants.KEY_AGE)){
-            int age = b.getInt(Constants.KEY_AGE);
-            msg.append("Your age is ").append(age);
-        }
-
         textView.setText(msg);
     }
 

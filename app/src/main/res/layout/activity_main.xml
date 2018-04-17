@@ -76,7 +76,7 @@
         android:id="@+id/birthdayEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="getCalendar"
+        android:onClick="onDateClicked"
         android:hint="@string/birthday"
         android:inputType="none"
         />
