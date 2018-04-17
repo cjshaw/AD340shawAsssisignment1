@@ -11,4 +11,13 @@
         android:textColor="#8e8c8c"
         android:textSize="30sp"
         android:textStyle="bold"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/backBtn"
+        android:text="@string/go_back"
+        android:layout_alignBaseline="@id/textView"
+        android:onClick="goBack"
+        />
 </RelativeLayout>
