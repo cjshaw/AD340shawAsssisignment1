@@ -1,7 +1,6 @@
 package com.example.shawasssisignment1;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.util.Calendar;
@@ -11,9 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import android.app.DialogFragment;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,9 +27,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText editUsername;
     private Button birthdayEdit;
     private TextView birthdayDate;
+
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,45 +63,28 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
 
         } else if (editUsername.getText().toString().trim().isEmpty()){
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
-            builder1.setMessage("You must enter have a username to join this club.");
-            builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                }
-            });
-            builder1.show();
+            dialogueAlert(Constants.USERNAME_MSG);
 
         } else if (getAge() < 18) {
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
-            builder1.setMessage("You must 18 or older, kiddo.");
-            builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                }
-            });
-            builder1.show();
+            dialogueAlert(Constants.DOB_MSG);
 
         } else if(!validate(editEmail.getText().toString())) {
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
-            builder1.setMessage("Re-enter a valid email!");
-            builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                }
-            });
-            builder1.show();
+            dialogueAlert(Constants.EMAIL_MSG);
 
         } else if (editName.getText().toString().trim().isEmpty()){
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
-            builder1.setMessage("Please enter a name!");
-            builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                }
-            });
-            builder1.show();
+            dialogueAlert(Constants.NAME_MSG);
         }
+    }
+
+    public void dialogueAlert(String message) {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+        builder1.setMessage(message);
+        builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+        builder1.show();
     }
 
     public int getAge() {
