@@ -20,7 +20,7 @@ public class SecondActivity extends AppCompatActivity {
         textView = findViewById(R.id.textView);
         backBtn = findViewById(R.id.backBtn);
 
-        StringBuilder msg = new StringBuilder("Thanks for Signing Up  \n");
+        StringBuilder msg = new StringBuilder("Thanks for Signing Up: ");
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
 
@@ -34,7 +34,7 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     public void goBack(View v){
-        Intent i=new Intent(this, MainActivity.class);
+        Intent i = new Intent(this, MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
     }
