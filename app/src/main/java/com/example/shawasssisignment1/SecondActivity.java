@@ -13,6 +13,10 @@ public class SecondActivity extends AppCompatActivity {
     TextView textView;
     Button  backBtn;
 
+    /**
+     * onCreate function that displays message to user with information gathered from the form.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +37,10 @@ public class SecondActivity extends AppCompatActivity {
         textView.setText(msg);
     }
 
+    /**
+     * goes back to MainActivity and clears the stack of activities
+     * @param v
+     */
     public void goBack(View v){
         Intent i = new Intent(this, MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

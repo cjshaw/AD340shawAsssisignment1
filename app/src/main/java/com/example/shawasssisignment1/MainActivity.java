@@ -28,9 +28,12 @@ public class MainActivity extends AppCompatActivity {
     private Button birthdayEdit;
     private TextView birthdayDate;
 
-    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
-            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
+
+    /**
+     * onCreate that finds all form elements by id
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,36 +49,47 @@ public class MainActivity extends AppCompatActivity {
         submitBtn = findViewById(R.id.submitBtn);
         birthdayDate = findViewById(R.id.birthday);
         birthdayEdit = findViewById(R.id.birthdayEdit);
-
     }
 
+    /**
+     * creates catepicker objectand gets new fragment from DatePickerFragment class
+     * @param v
+     */
     public void onDateClicked(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getFragmentManager(),"datePicker");
     }
 
-
+    /**
+     * submits view and bundles username for SecondActivity.
+     * @param v
+     */
     public void onSubmit(View v) {
+        //if all input is correct, submits view
         if (!editUsername.getText().toString().trim().isEmpty() && getAge() >= Constants.MIN_AGE
                 && validate(editEmail.getText().toString()) && !editName.getText().toString().trim().isEmpty()) {
             Intent intent = new Intent(MainActivity.this, SecondActivity.class);
             intent.putExtra(Constants.KEY_USERNAME, editUsername.getText().toString());
             startActivity(intent);
-
+        //checks for empty username
         } else if (editUsername.getText().toString().trim().isEmpty()){
             dialogueAlert(Constants.USERNAME_MSG);
-
+        //checks for age
         } else if (getAge() < 18) {
             dialogueAlert(Constants.DOB_MSG);
-
+        //uses regex to check for valid emails.
         } else if(!validate(editEmail.getText().toString())) {
             dialogueAlert(Constants.EMAIL_MSG);
-
+        //checks for empty name
         } else if (editName.getText().toString().trim().isEmpty()){
             dialogueAlert(Constants.NAME_MSG);
         }
     }
 
+    /**
+     * creates alert dialogue
+     * @param message
+     */
     public void dialogueAlert(String message) {
         AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
         builder1.setMessage(message);
@@ -87,6 +101,10 @@ public class MainActivity extends AppCompatActivity {
         builder1.show();
     }
 
+    /**
+     * calculates age based on date picked
+     * @return age
+     */
     public int getAge() {
         Calendar today = Calendar.getInstance();
 
@@ -102,11 +120,20 @@ public class MainActivity extends AppCompatActivity {
         return age;
     }
 
+    /**
+     * validates email address based on Regex patter
+     * @param emailStr
+     * @return boolean
+     */
     public static boolean validate(String emailStr) {
-        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        Matcher matcher = Constants.VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
         return matcher.find();
     }
 
+    /**
+     * restores text in edit fields when screen is rotated.
+     * @param savedInstanceState
+     */
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -134,6 +161,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * saves strings in edit fields for when screen gets rotated.
+     * @param outState
+     */
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

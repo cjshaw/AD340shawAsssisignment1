@@ -1,5 +1,7 @@
 package com.example.shawasssisignment1;
 
+import java.util.regex.Pattern;
+
 public class Constants {
     static final int MIN_AGE = 18;
     static final String KEY_NAME = "name";
@@ -11,4 +13,6 @@ public class Constants {
     static final String DOB_MSG = "You must 18 or older, kiddo.";
     static final String EMAIL_MSG = "Re-enter a valid email!";
     static final String NAME_MSG = "Please enter a name!";
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 }
