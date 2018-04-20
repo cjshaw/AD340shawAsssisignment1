@@ -2,6 +2,7 @@ package com.example.shawasssisignment1;
 
 import android.content.Intent;
 import android.support.test.espresso.Espresso;
+import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.PickerActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -17,6 +18,7 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -39,13 +41,14 @@ public class MainActivityTest {
         onView(withId(R.id.emailEdit))
                 .perform(typeText("test@test.com"));
 
+        Espresso.closeSoftKeyboard();
+
         onView(withId(R.id.birthdayEdit))
                 .perform(click());
 
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName())))
                 .perform(PickerActions.setDate(2000, 1, 1));
         onView(withId(android.R.id.button1)).perform(click());
-
 
         onView(withId(R.id.birthdayEdit))
                 .check(matches(withText("1/1/2000")));
@@ -76,13 +79,13 @@ public class MainActivityTest {
         onView(withId(R.id.emailEdit))
                 .perform(typeText("test@test.com"));
 
+        Espresso.closeSoftKeyboard();
+
         onView(withId(R.id.birthdayEdit))
                 .perform(click());
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName())))
                 .perform(PickerActions.setDate(2000, 1, 1));
         onView(withId(android.R.id.button1)).perform(click());
-
-        Espresso.closeSoftKeyboard();
 
         onView(withId(R.id.submitBtn))
                 .perform(click());
@@ -103,13 +106,13 @@ public class MainActivityTest {
         onView(withId(R.id.emailEdit))
                 .perform(typeText("test@test.com"));
 
+        Espresso.closeSoftKeyboard();
+
         onView(withId(R.id.birthdayEdit))
                 .perform(click());
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName())))
                 .perform(PickerActions.setDate(2000, 1, 1));
         onView(withId(android.R.id.button1)).perform(click());
-
-        Espresso.closeSoftKeyboard();
 
         onView(withId(R.id.submitBtn))
                 .perform(click());
@@ -130,13 +133,13 @@ public class MainActivityTest {
         onView(withId(R.id.emailEdit))
                 .perform(typeText("testtest.com"));
 
+        Espresso.closeSoftKeyboard();
+
         onView(withId(R.id.birthdayEdit))
                 .perform(click());
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName())))
                 .perform(PickerActions.setDate(2000, 1, 1));
         onView(withId(android.R.id.button1)).perform(click());
-
-        Espresso.closeSoftKeyboard();
 
         onView(withId(R.id.submitBtn))
                 .perform(click());
@@ -157,13 +160,13 @@ public class MainActivityTest {
         onView(withId(R.id.emailEdit))
                 .perform(typeText("test@test.com"));
 
+        Espresso.closeSoftKeyboard();
+
         onView(withId(R.id.birthdayEdit))
                 .perform(click());
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName())))
                 .perform(PickerActions.setDate(2000, 4, 30));
         onView(withId(android.R.id.button1)).perform(click());
-
-        Espresso.closeSoftKeyboard();;
 
         onView(withId(R.id.submitBtn))
                 .perform(click());
@@ -184,6 +187,8 @@ public class MainActivityTest {
         onView(withId(R.id.emailEdit))
                 .perform(typeText("test@test.com"));
 
+        Espresso.closeSoftKeyboard();
+
         onView(withId(R.id.birthdayEdit))
                 .perform(click());
 
@@ -196,5 +201,24 @@ public class MainActivityTest {
 
         activityTestRule.launchActivity(intent);
 
+    }
+
+    @Test
+    public void testAgeTxt(){
+
+        Espresso.closeSoftKeyboard();
+
+        onView(withId(R.id.birthdayEdit))
+                .perform(click());
+
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName())))
+                .perform(PickerActions.setDate(2000, 1, 1));
+        onView(withId(android.R.id.button1)).perform(ViewActions.scrollTo()).perform(click());
+
+        onView(withId(R.id.birthdayEdit)).perform(ViewActions.scrollTo())
+                .check(matches(withText("1/1/2000")));
+
+        onView(withId(R.id.birthday)).perform(ViewActions.scrollTo())
+                .check(matches(withText(Constants.AGE_MSG + 18)));
     }
 }

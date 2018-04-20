@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * creates catepicker objectand gets new fragment from DatePickerFragment class
+     * creates datepicker object and gets new fragment from DatePickerFragment class
      * @param v
      */
     public void onDateClicked(View v) {
@@ -138,27 +138,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        if (savedInstanceState.containsKey(Constants.KEY_NAME)) {
-            editName.setText((String)savedInstanceState.get(Constants.KEY_NAME));
-        }
-
-        if (savedInstanceState.containsKey(Constants.KEY_USERNAME)) {
-            editUsername.setText((String)savedInstanceState.get(Constants.KEY_USERNAME));
-        }
-
-        if (savedInstanceState.containsKey(Constants.KEY_EMAIL)) {
-            editEmail.setText((String)savedInstanceState.get(Constants.KEY_EMAIL));
-        }
-
-        if (savedInstanceState.containsKey(Constants.KEY_BUTTON_TXT)) {
-            submitBtn.setText((String) savedInstanceState.get(Constants.KEY_BUTTON_TXT));
-        }
-
         if (savedInstanceState.containsKey(Constants.KEY_BDAY_BTN_TXT)) {
             birthdayEdit.setText((String) savedInstanceState.get(Constants.KEY_BDAY_BTN_TXT));
         }
 
-
+        if (savedInstanceState.containsKey(Constants.KEY_BDAY_TEXTVIEW)) {
+            birthdayDate.setText((String) savedInstanceState.get(Constants.KEY_BDAY_TEXTVIEW));
+        }
     }
 
     /**
@@ -168,10 +154,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(Constants.KEY_NAME, editName.getText().toString());
-        outState.putString(Constants.KEY_BUTTON_TXT, submitBtn.getText().toString());
         outState.putString(Constants.KEY_BDAY_BTN_TXT, birthdayEdit.getText().toString());
-        outState.putString(Constants.KEY_USERNAME, editUsername.getText().toString());
-        outState.putString(Constants.KEY_EMAIL, editEmail.getText().toString());
+        outState.putString(Constants.KEY_BDAY_TEXTVIEW, birthdayDate.getText().toString());
     }
 }
