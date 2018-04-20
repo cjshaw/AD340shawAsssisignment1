@@ -12,5 +12,7 @@
     <string name="date_of_birth">Click to Set Your Date of Birth</string>
     <string name="ok">ok</string>
     <string name="go_back">Go Back</string>
+    <string name="take_a_picture_with_your_camera">Take a picture with your camera</string>
+    <string name="get_image_from_camera_roll">Get image from camera roll...</string>
 
 </resources>

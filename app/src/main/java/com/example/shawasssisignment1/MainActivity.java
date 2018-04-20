@@ -4,13 +4,17 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.util.Calendar;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.app.DialogFragment;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,11 +31,14 @@ public class MainActivity extends AppCompatActivity {
     private EditText editUsername;
     private Button birthdayEdit;
     private TextView birthdayDate;
-
+    private Button savedImage;
+    private ImageView imageview;
+    private Uri selectedImage;
 
 
     /**
      * onCreate that finds all form elements by id
+     *
      * @param savedInstanceState
      */
     @Override
@@ -49,19 +56,25 @@ public class MainActivity extends AppCompatActivity {
         submitBtn = findViewById(R.id.submitBtn);
         birthdayDate = findViewById(R.id.birthday);
         birthdayEdit = findViewById(R.id.birthdayEdit);
+        savedImage = findViewById(R.id.savedImage);
+        imageview = findViewById(R.id.selectedImg);
+        selectedImage = null;
+
     }
 
     /**
      * creates datepicker object and gets new fragment from DatePickerFragment class
+     *
      * @param v
      */
     public void onDateClicked(View v) {
         DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getFragmentManager(),"datePicker");
+        newFragment.show(getFragmentManager(), "datePicker");
     }
 
     /**
      * submits view and bundles username for SecondActivity.
+     *
      * @param v
      */
     public void onSubmit(View v) {
@@ -69,25 +82,27 @@ public class MainActivity extends AppCompatActivity {
         if (!editUsername.getText().toString().trim().isEmpty() && getAge() >= Constants.MIN_AGE
                 && validate(editEmail.getText().toString()) && !editName.getText().toString().trim().isEmpty()) {
             Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+            intent.putExtra(Constants.KEY_IMG, selectedImage);
             intent.putExtra(Constants.KEY_USERNAME, editUsername.getText().toString());
             startActivity(intent);
-        //checks for empty username
-        } else if (editUsername.getText().toString().trim().isEmpty()){
+            //checks for empty username
+        } else if (editUsername.getText().toString().trim().isEmpty()) {
             dialogueAlert(Constants.USERNAME_MSG);
-        //checks for age
+            //checks for age
         } else if (getAge() < 18) {
             dialogueAlert(Constants.DOB_MSG);
-        //uses regex to check for valid emails.
-        } else if(!validate(editEmail.getText().toString())) {
+            //uses regex to check for valid emails.
+        } else if (!validate(editEmail.getText().toString())) {
             dialogueAlert(Constants.EMAIL_MSG);
-        //checks for empty name
-        } else if (editName.getText().toString().trim().isEmpty()){
+            //checks for empty name
+        } else if (editName.getText().toString().trim().isEmpty()) {
             dialogueAlert(Constants.NAME_MSG);
         }
     }
 
     /**
      * creates alert dialogue
+     *
      * @param message
      */
     public void dialogueAlert(String message) {
@@ -103,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * calculates age based on date picked
+     *
      * @return age
      */
     public int getAge() {
@@ -110,10 +126,10 @@ public class MainActivity extends AppCompatActivity {
 
         int age = today.get(Calendar.YEAR) - DatePickerFragment.getYear();
 
-        if (DatePickerFragment.getMonth()>today.get(Calendar.MONTH)+1){
+        if (DatePickerFragment.getMonth() > today.get(Calendar.MONTH) + 1) {
             age--;
-        } else if (DatePickerFragment.getMonth()==today.get(Calendar.MONTH)+1){
-            if(DatePickerFragment.getDay()>today.get(Calendar.DAY_OF_MONTH)) {
+        } else if (DatePickerFragment.getMonth() == today.get(Calendar.MONTH) + 1) {
+            if (DatePickerFragment.getDay() > today.get(Calendar.DAY_OF_MONTH)) {
                 age--;
             }
         }
@@ -122,16 +138,35 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * validates email address based on Regex patter
+     *
      * @param emailStr
      * @return boolean
      */
     public static boolean validate(String emailStr) {
-        Matcher matcher = Constants.VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        Matcher matcher = Constants.VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
         return matcher.find();
+    }
+
+    public void imagePick(View v) {
+        Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(pickPhoto, 1);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
+        if (requestCode == 1) {
+            selectedImage = imageReturnedIntent.getData();
+            if (selectedImage != null) {
+                imageview.setImageURI(selectedImage);
+                imageview.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     /**
      * restores text in edit fields when screen is rotated.
+     *
      * @param savedInstanceState
      */
     @Override
@@ -149,6 +184,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * saves strings in edit fields for when screen gets rotated.
+     *
      * @param outState
      */
     @Override
