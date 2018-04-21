@@ -27,4 +27,5 @@
         android:text="@string/go_back"
         android:onClick="goBack"
         />
+
 </RelativeLayout>

@@ -21,36 +21,11 @@
             android:text="@string/heading" />
 
         <EditText
-            android:id="@+id/usernameEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/enter_username"
-            android:inputType="text" />
-
-        <TextView
-            android:id="@+id/username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:text="@string/username"
-            android:textSize="24.0dp"
-            android:textStyle="bold" />
-
-        <EditText
             android:id="@+id/nameEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_name"
             android:inputType="text" />
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:text="@string/name"
-            android:textSize="24.0dp"
-            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/emailEdit"
@@ -59,14 +34,22 @@
             android:hint="@string/enter_email"
             android:inputType="textWebEmailAddress" />
 
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/occEdit"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:text="@string/email_address"
-            android:textSize="24.0dp"
-            android:textStyle="bold" />
+            android:hint="@string/enter_occupation"
+            android:inputType="text" />
+
+        <EditText
+            android:id ="@+id/descBox"
+            android:layout_width ="match_parent"
+            android:layout_height ="wrap_content"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLines ="4"
+            android:maxLength ="2000"
+            android:hint ="@string/tell_us_about_yourself"
+            android:scrollHorizontally="false" />
 
         <Button
             android:id="@+id/birthdayEdit"
@@ -76,16 +59,6 @@
             android:inputType="none"
             android:onClick="onDateClicked" />
 
-        <TextView
-            android:id="@+id/birthday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:text="@string/date_of_birth"
-            android:textSize="24.0dp"
-            android:textStyle="bold" />
-
         <Button
             android:id="@+id/savedImage"
             android:layout_width="match_parent"
@@ -93,8 +66,7 @@
             android:layout_weight="1"
             android:onClick="imagePick"
             android:padding="10dp"
-            android:text="@string/get_image_from_camera_roll"
-            android:textStyle="bold" />
+            android:hint="@string/get_image_from_camera_roll" />
 
         <ImageView
             android:id="@+id/selectedImg"
@@ -102,7 +74,8 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:padding="10dp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:contentDescription="@string/profile_picture" />
 
         <Button
             android:id="@+id/submitBtn"

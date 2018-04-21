@@ -1,18 +1,16 @@
 <resources>
-    <string name="app_name">AD340Assignment2</string>
-    <string name="heading">Shaw, Clinton 15.4.2018</string>
-    <string name="name">Name</string>
+    <string name="app_name">AD340Assignment3</string>
+    <string name="heading">Shaw, Clinton 20.4.2018</string>
     <string name="submit">Submit</string>
-    <string name="enter_name">Enter name...</string>
-    <string name="email_address">Email Address</string>
-    <string name="username">Username</string>
-    <string name="enter_username">Enter username...</string>
-    <string name="enter_email">Enter email...</string>
-    <string name="birthday">Enter your birthday...</string>
-    <string name="date_of_birth">Click to Set Your Date of Birth</string>
-    <string name="ok">ok</string>
+    <string name="enter_name">Enter name…</string>
+    <string name="enter_occupation">Enter occupation…</string>
+    <string name="enter_email">Enter email…</string>
+    <string name="birthday">Enter your birthday…</string>
+    <string name="ok">OK</string>
     <string name="go_back">Go Back</string>
     <string name="take_a_picture_with_your_camera">Take a picture with your camera</string>
-    <string name="get_image_from_camera_roll">Get image from camera roll...</string>
+    <string name="get_image_from_camera_roll">Get image from camera roll…</string>
+    <string name="profile_picture">profile picture</string>
+    <string name="tell_us_about_yourself">Tell us about yourself…</string>
 
 </resources>

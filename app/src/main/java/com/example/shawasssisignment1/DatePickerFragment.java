@@ -32,32 +32,15 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        Calendar cal = Calendar.getInstance();
-        int currYear = cal.get(Calendar.YEAR);
-        int currMonth = cal.get(Calendar.MONTH);
-        int currDay = cal.get(Calendar.DAY_OF_MONTH);
 
         Button btn = getActivity().findViewById(R.id.birthdayEdit);
-        TextView ageTxt = getActivity().findViewById(R.id.birthday);
         month++;
 
         setMonth(month);
         setDay(day);
         setYear(year);
 
-        int age = currYear - year;
-
-        if (month > currMonth+1){
-            age--;
-        } else if (month==currMonth+1){
-            if(day>currDay) {
-                age--;
-            }
-        }
-
         btn.setText(month+"/"+day+"/"+year);
-        ageTxt.setText(Constants.AGE_MSG + age);
-
     }
 
     public static void setMonth(int month) {

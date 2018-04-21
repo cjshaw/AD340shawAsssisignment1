@@ -23,17 +23,15 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView header;
     private Button submitBtn;
-    private TextView name;
     private EditText editName;
-    private TextView email;
     private EditText editEmail;
-    private TextView username;
-    private EditText editUsername;
+    private EditText editOcc;
     private Button birthdayEdit;
-    private TextView birthdayDate;
     private Button savedImage;
     private ImageView imageview;
     private Uri selectedImage;
+    private EditText description;
+    private EditText occupation;
 
 
     /**
@@ -47,17 +45,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         header = findViewById(R.id.header);
-        username = findViewById(R.id.username);
-        editUsername = findViewById(R.id.usernameEdit);
-        name = findViewById(R.id.name);
+        editOcc = findViewById(R.id.occEdit);
         editName = findViewById(R.id.nameEdit);
-        email = findViewById(R.id.email);
         editEmail = findViewById(R.id.emailEdit);
         submitBtn = findViewById(R.id.submitBtn);
-        birthdayDate = findViewById(R.id.birthday);
         birthdayEdit = findViewById(R.id.birthdayEdit);
         savedImage = findViewById(R.id.savedImage);
         imageview = findViewById(R.id.selectedImg);
+        description = findViewById(R.id.descBox);
         selectedImage = null;
 
     }
@@ -79,15 +74,20 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onSubmit(View v) {
         //if all input is correct, submits view
-        if (!editUsername.getText().toString().trim().isEmpty() && getAge() >= Constants.MIN_AGE
-                && validate(editEmail.getText().toString()) && !editName.getText().toString().trim().isEmpty()) {
+        if (!editOcc.getText().toString().trim().isEmpty() && getAge() >= Constants.MIN_AGE
+                && validate(editEmail.getText().toString()) && !editName.getText().toString().trim().isEmpty()
+                && selectedImage != null) {
             Intent intent = new Intent(MainActivity.this, SecondActivity.class);
             intent.putExtra(Constants.KEY_IMG, selectedImage);
-            intent.putExtra(Constants.KEY_USERNAME, editUsername.getText().toString());
+            intent.putExtra(Constants.KEY_OCC, editOcc.getText().toString());
+            intent.putExtra(Constants.KEY_AGE, getAge());
+            intent.putExtra(Constants.KEY_DESC, description.getText().toString());
+            intent.putExtra(Constants.KEY_NAME, editName.getText().toString());
+
             startActivity(intent);
-            //checks for empty username
-        } else if (editUsername.getText().toString().trim().isEmpty()) {
-            dialogueAlert(Constants.USERNAME_MSG);
+            //checks for empty occupation field
+        } else if (editOcc.getText().toString().trim().isEmpty()) {
+            dialogueAlert(Constants.OCC_MSG);
             //checks for age
         } else if (getAge() < 18) {
             dialogueAlert(Constants.DOB_MSG);
@@ -150,7 +150,9 @@ public class MainActivity extends AppCompatActivity {
     public void imagePick(View v) {
         Intent pickPhoto = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(pickPhoto, 1);
+
+            startActivityForResult(pickPhoto, 1);
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
@@ -177,9 +179,6 @@ public class MainActivity extends AppCompatActivity {
             birthdayEdit.setText((String) savedInstanceState.get(Constants.KEY_BDAY_BTN_TXT));
         }
 
-        if (savedInstanceState.containsKey(Constants.KEY_BDAY_TEXTVIEW)) {
-            birthdayDate.setText((String) savedInstanceState.get(Constants.KEY_BDAY_TEXTVIEW));
-        }
     }
 
     /**
@@ -191,6 +190,5 @@ public class MainActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(Constants.KEY_BDAY_BTN_TXT, birthdayEdit.getText().toString());
-        outState.putString(Constants.KEY_BDAY_TEXTVIEW, birthdayDate.getText().toString());
     }
 }
