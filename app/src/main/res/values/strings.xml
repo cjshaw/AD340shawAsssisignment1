@@ -12,5 +12,6 @@
     <string name="get_image_from_camera_roll">Get image from camera roll…</string>
     <string name="profile_picture">profile picture</string>
     <string name="tell_us_about_yourself">Tell us about yourself…</string>
+    <string name="profile_pic2">Profile picture</string>
 
 </resources>

@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 public class SecondActivity extends AppCompatActivity {
 
-    TextView textView;
+    TextView ageName;
+    TextView job;
+    TextView desc;
     Button  backBtn;
     ImageView profileImg;
 
@@ -24,27 +26,49 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        textView = findViewById(R.id.textView);
+        ageName = findViewById(R.id.userAgeName);
+        job = findViewById(R.id.userOcc);
+        desc = findViewById(R.id.userDesc);
         profileImg = findViewById(R.id.profileImg);
         backBtn = findViewById(R.id.backBtn);
 
-        StringBuilder msg = new StringBuilder("Thanks for Signing Up: ");
+        StringBuilder ageNameMsg = new StringBuilder("");
+        StringBuilder occMsg = new StringBuilder("");
+        StringBuilder descMsg = new StringBuilder("");
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
 
         assert b != null;
 
-        if(b.containsKey(Constants.KEY_USERNAME)){
-            String username = b.getString(Constants.KEY_USERNAME);
-            msg.append(username).append("!");
-        }
-        textView.setText(msg);
-
         Uri img = null;
-        if(b.containsKey(Constants.KEY_IMG)) {
+        if (b.containsKey(Constants.KEY_IMG)) {
             img = b.getParcelable(Constants.KEY_IMG);
         }
         profileImg.setImageURI(img);
+
+        if (b.containsKey(Constants.KEY_AGE)) {
+            int userAge = b.getInt(Constants.KEY_AGE);
+            ageNameMsg.append(userAge).append(",\t\t");
+        }
+
+        if (b.containsKey(Constants.KEY_NAME)){
+            String name = b.getString(Constants.KEY_NAME);
+            ageNameMsg.append(name);
+        }
+        ageName.setText(ageNameMsg);
+
+        if (b.containsKey(Constants.KEY_OCC)) {
+            String occ = b.getString(Constants.KEY_OCC);
+            occMsg.append(occ);
+        }
+        job.setText(occMsg);
+
+        if (b.containsKey(Constants.KEY_DESC)){
+                String desc = b.getString(Constants.KEY_DESC);
+            descMsg.append(desc);
+            }
+        desc.setText(descMsg);
+
 
     }
 

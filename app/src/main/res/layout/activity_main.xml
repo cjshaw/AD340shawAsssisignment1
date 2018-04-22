@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.shawasssisignment1.MainActivity">
@@ -65,14 +65,15 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:onClick="imagePick"
-            android:padding="10dp"
+            android:padding="@dimen/image_pad"
             android:hint="@string/get_image_from_camera_roll" />
 
         <ImageView
             android:id="@+id/selectedImg"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
+            android:layout_height="@dimen/profile_picture_height"
+
+            android:scaleType="fitCenter"
             android:padding="10dp"
             android:visibility="gone"
             android:contentDescription="@string/profile_picture" />

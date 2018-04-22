@@ -3,4 +3,6 @@
     <dimen name="layoutMargin">50dp</dimen>
     <dimen name="imgButtonW">240dp</dimen>
     <dimen name="imgButtonH">320dp</dimen>
+    <dimen name="profile_picture_height">400dp</dimen>
+    <dimen name="image_pad">10dp</dimen>
 </resources>
