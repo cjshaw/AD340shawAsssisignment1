@@ -97,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
             //checks for empty name
         } else if (editName.getText().toString().trim().isEmpty()) {
             dialogueAlert(Constants.NAME_MSG);
+        } else if(selectedImage == null) {
+            dialogueAlert(Constants.IMG_MSG);
         }
     }
 
@@ -157,11 +159,13 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
-        if (requestCode == 1) {
-            selectedImage = imageReturnedIntent.getData();
-            if (selectedImage != null) {
-                imageview.setImageURI(selectedImage);
-                imageview.setVisibility(View.VISIBLE);
+        if(resultCode == RESULT_OK) {
+            if (requestCode == 1) {
+                selectedImage = imageReturnedIntent.getData();
+                if (selectedImage != null) {
+                    imageview.setImageURI(selectedImage);
+                    imageview.setVisibility(View.VISIBLE);
+                }
             }
         }
     }
