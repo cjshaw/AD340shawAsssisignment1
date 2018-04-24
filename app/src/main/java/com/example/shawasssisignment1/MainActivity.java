@@ -1,25 +1,26 @@
 package com.example.shawasssisignment1;
 
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.net.Uri;
-import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.app.DialogFragment;
 
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     private TextView header;
     private Button submitBtn;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         header = findViewById(R.id.header);
         editOcc = findViewById(R.id.occEdit);
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         savedImage = findViewById(R.id.savedImage);
         imageview = findViewById(R.id.selectedImg);
         description = findViewById(R.id.descBox);
-        selectedImage = null;
+
 
     }
 
@@ -162,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
         if(resultCode == RESULT_OK) {
             if (requestCode == 1) {
                 selectedImage = imageReturnedIntent.getData();
+
                 if (selectedImage != null) {
                     imageview.setImageURI(selectedImage);
                     imageview.setVisibility(View.VISIBLE);
@@ -183,10 +186,20 @@ public class MainActivity extends AppCompatActivity {
             birthdayEdit.setText((String) savedInstanceState.get(Constants.KEY_BDAY_BTN_TXT));
         }
 
+        if (savedInstanceState.containsKey(Constants.KEY_IMG)) {
+            imageview.setVisibility(View.VISIBLE);
+            selectedImage = Uri.parse(savedInstanceState.getString(Constants.KEY_IMG));
+            imageview.setImageURI(selectedImage);
+
+//            if(selectedImage != null) {
+//                Log.e(TAG, selectedImage.toString());
+//            }
+        }
+
     }
 
     /**
-     * saves strings in edit fields for when screen gets rotated.
+     * saves Views in edit fields for when screen gets rotated.
      *
      * @param outState
      */
@@ -194,5 +207,14 @@ public class MainActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(Constants.KEY_BDAY_BTN_TXT, birthdayEdit.getText().toString());
+
+        if(selectedImage != null) {
+            outState.putString(Constants.KEY_IMG, selectedImage.toString());
+        }
+
+//        if(selectedImage != null) {
+//            Log.e(TAG, selectedImage.toString());
+//        }
     }
+
 }
