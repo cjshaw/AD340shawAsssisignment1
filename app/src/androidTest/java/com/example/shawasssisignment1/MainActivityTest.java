@@ -125,7 +125,43 @@ public class MainActivityTest {
             }
 
     @Test
-    public void checkTextOnScreen() {
+    public void testOnSubmitImg() {
+
+        onView(withId(R.id.nameEdit))
+                .perform(typeText("Clint Shaw"));
+
+        onView(withId(R.id.emailEdit))
+                .perform(typeText("test@test.com"));
+
+        onView(withId(R.id.occEdit))
+                .perform(typeText("test occupation"));
+
+        onView(withId(R.id.descBox)).perform(typeText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                "Vestibulum eleifend odio volutpat nibh ultricies mattis. " +
+                "Sed lobortis mauris ac turpis egestas, ut consequat ligula hendrerit. " +
+                "Nullam tempus neque nec neque lacinia venenatis sit amet ornare dolor. " +
+                "Praesent suscipit convallis orci sit amet fermentum. Mauris porta enim vitae congue ultricies. " +
+                "Suspendisse elementum eleifend auctor. Sed commodo ante nec placerat aliquam."));
+
+        Espresso.closeSoftKeyboard();
+
+        onView(withId(R.id.birthdayEdit))
+                .perform(click());
+
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName())))
+                .perform(PickerActions.setDate(2000, 1, 1));
+
+        onView(withId(android.R.id.button1)).perform(click());
+
+        onView(withId(R.id.submitBtn))
+                .perform(scrollTo(), click());
+
+        onView(withText(Constants.IMG_MSG))
+                .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void checkImgPick() {
         //to check view on screen
 
         Intent resultData = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -329,29 +365,11 @@ public class MainActivityTest {
                 "Nullam tempus neque nec neque lacinia venenatis sit amet ornare dolor. " +
                 "Praesent suscipit convallis orci sit amet fermentum. Mauris porta enim vitae congue ultricies. " +
                 "Suspendisse elementum eleifend auctor. Sed commodo ante nec placerat aliquam.");
-
+        intent.putExtra(Constants.KEY_IMG, Uri.parse(("content://media/external/images/media/337663")));
 
 
         activityTestRule.launchActivity(intent);
 
     }
-//
-//    @Test
-//    public void testAgeTxt(){
-//
-//        Espresso.closeSoftKeyboard();
-//
-//        onView(withId(R.id.birthdayEdit))
-//                .perform(click());
-//
-//        onView(withClassName(Matchers.equalTo(DatePicker.class.getName())))
-//                .perform(PickerActions.setDate(2000, 1, 1));
-//        onView(withId(android.R.id.button1)).perform(ViewActions.scrollTo()).perform(click());
-//
-//        onView(withId(R.id.birthdayEdit)).perform(ViewActions.scrollTo())
-//                .check(matches(withText("1/1/2000")));
-//
-//        onView(withId(R.id.birthday)).perform(ViewActions.scrollTo())
-//                .check(matches(withText(Constants.AGE_MSG + 18)));
-//    }
+
 }
