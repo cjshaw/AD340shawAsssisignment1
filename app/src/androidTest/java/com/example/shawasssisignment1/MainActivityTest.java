@@ -316,6 +316,7 @@ public class MainActivityTest {
 
         onView(withId(R.id.savedImage)).perform(click());
         intended(MediaPickIntent);
+        Intents.release();
 
 
         Intent intent = new Intent();
