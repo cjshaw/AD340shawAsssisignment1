@@ -371,5 +371,46 @@ public class MainActivityTest {
         activityTestRule.launchActivity(intent);
 
     }
+    @Test
+    public void testAgeMonth(){
+        onView(withId(R.id.nameEdit))
+                .perform(typeText("Clint Shaw"));
 
+        onView(withId(R.id.emailEdit))
+                .perform(typeText("test@test.com"));
+
+        onView(withId(R.id.occEdit))
+                .perform(typeText("occupation test"));
+
+        onView(withId(R.id.descBox)).perform(typeText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                "Vestibulum eleifend odio volutpat nibh ultricies mattis. " +
+                "Sed lobortis mauris ac turpis egestas, ut consequat ligula hendrerit. " +
+                "Nullam tempus neque nec neque lacinia venenatis sit amet ornare dolor. " +
+                "Praesent suscipit convallis orci sit amet fermentum. Mauris porta enim vitae congue ultricies. " +
+                "Suspendisse elementum eleifend auctor. Sed commodo ante nec placerat aliquam."));
+
+        Espresso.closeSoftKeyboard();
+
+        onView(withId(R.id.birthdayEdit))
+                .perform(click());
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName())))
+                .perform(PickerActions.setDate(2000, 9, 30));
+        onView(withId(android.R.id.button1)).perform(click());
+
+        Intent resultData = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        resultData.setData(Uri.parse(("content://media/external/images/media/337663")));
+        Matcher<Intent> MediaPickIntent = allOf(hasAction(Intent.ACTION_PICK), hasData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI));
+        Intents.init();
+        intending(MediaPickIntent).respondWith(new Instrumentation.ActivityResult(Activity.RESULT_OK, resultData));
+
+        onView(withId(R.id.savedImage)).perform(click());
+        intended(MediaPickIntent);
+        Intents.release();
+
+        onView(withId(R.id.submitBtn))
+                .perform(scrollTo(), click());
+
+        onView(withText(Constants.DOB_MSG))
+                .check(matches(isDisplayed()));
+    }
 }
