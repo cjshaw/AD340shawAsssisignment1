@@ -72,7 +72,6 @@
             android:id="@+id/selectedImg"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/profile_picture_height"
-
             android:scaleType="fitCenter"
             android:padding="10dp"
             android:visibility="gone"
