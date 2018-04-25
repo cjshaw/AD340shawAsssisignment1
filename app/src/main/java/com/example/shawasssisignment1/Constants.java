@@ -8,10 +8,7 @@ public class Constants {
     //Keys for bundled extras
     static final String KEY_NAME = "name";
     static final String KEY_USERNAME = "username";
-    static final String KEY_EMAIL = "email";
-    static final String KEY_BUTTON_TXT = "button_txt";
     static final String KEY_BDAY_BTN_TXT = "bday_btn_txt";
-    static final String KEY_BDAY_TEXTVIEW = "bday_textview";
     static final String KEY_IMG = "profile_img";
     static final String KEY_AGE = "user_age";
     static final String KEY_DESC = "user_description";
