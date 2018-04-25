@@ -2,6 +2,7 @@ package com.example.shawasssisignment1;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.test.espresso.Espresso;
 import android.support.test.espresso.ViewAssertion;
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
@@ -82,5 +83,25 @@ public class SecondActivityTest {
         onView(withId(R.id.birthdayEdit))
                 .check(matches(withHint("Enter your birthday…")));
 
+    }
+
+    @Test
+    public void test_backButton() {
+        Espresso.pressBack();
+
+        onView(withId(R.id.occEdit))
+                .check(matches(withText("")));
+
+        onView(withId(R.id.nameEdit))
+                .check(matches(withText("")));
+
+        onView(withId(R.id.emailEdit))
+                .check(matches(withText("")));
+
+        onView(withId(R.id.descBox))
+                .check(matches(withText("")));
+
+        onView(withId(R.id.birthdayEdit))
+                .check(matches(withHint("Enter your birthday…")));
     }
 }
