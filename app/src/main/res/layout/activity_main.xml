@@ -42,13 +42,13 @@
             android:inputType="textCapWords" />
 
         <EditText
-            android:id ="@+id/descBox"
-            android:layout_width ="match_parent"
-            android:layout_height ="wrap_content"
+            android:id="@+id/descBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tell_us_about_yourself"
             android:inputType="textCapSentences|textMultiLine"
-            android:maxLines ="4"
-            android:maxLength ="2000"
-            android:hint ="@string/tell_us_about_yourself"
+            android:maxLength="2000"
+            android:maxLines="4"
             android:scrollHorizontally="false" />
 
         <Button
@@ -64,18 +64,18 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:hint="@string/get_image_from_camera_roll"
             android:onClick="imagePick"
-            android:padding="@dimen/image_pad"
-            android:hint="@string/get_image_from_camera_roll" />
+            android:padding="@dimen/image_pad" />
 
         <ImageView
             android:id="@+id/selectedImg"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/profile_picture_height"
-            android:scaleType="fitCenter"
+            android:contentDescription="@string/profile_picture"
             android:padding="10dp"
-            android:visibility="gone"
-            android:contentDescription="@string/profile_picture" />
+            android:scaleType="fitCenter"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/submitBtn"

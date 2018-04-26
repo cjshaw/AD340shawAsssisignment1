@@ -121,7 +121,8 @@ public class MainActivityTest {
                 .perform(scrollTo(), click());
 
         onView(withText(Constants.OCC_MSG))
-                .check(matches(isDisplayed()));
+                .check(matches(isDisplayed()))
+                .perform(click());
             }
 
     @Test
@@ -157,7 +158,8 @@ public class MainActivityTest {
                 .perform(scrollTo(), click());
 
         onView(withText(Constants.IMG_MSG))
-                .check(matches(isDisplayed()));
+                .check(matches(isDisplayed()))
+            .perform(click());
     }
 
     @Test
@@ -268,7 +270,8 @@ public class MainActivityTest {
                 .perform(scrollTo(), click());
 
         onView(withText(Constants.EMAIL_MSG))
-                .check(matches(isDisplayed()));
+                .check(matches(isDisplayed()))
+                .perform(click());
 
     }
 
@@ -312,7 +315,8 @@ public class MainActivityTest {
                 .perform(scrollTo(), click());
 
         onView(withText(Constants.DOB_MSG))
-                .check(matches(isDisplayed()));
+                .check(matches(isDisplayed()))
+                .perform(click());
 
     }
 
@@ -411,6 +415,8 @@ public class MainActivityTest {
                 .perform(scrollTo(), click());
 
         onView(withText(Constants.DOB_MSG))
-                .check(matches(isDisplayed()));
+                .check(matches(isDisplayed()))
+                .perform(click());
+
     }
 }
