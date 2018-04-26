@@ -26,6 +26,7 @@ import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.Intents.intending;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasAction;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasData;
+import static android.support.test.espresso.matcher.RootMatchers.isDialog;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -122,6 +123,7 @@ public class MainActivityTest {
 
         onView(withText(Constants.OCC_MSG))
                 .check(matches(isDisplayed()))
+                .inRoot(isDialog())
                 .perform(click());
             }
 
@@ -159,7 +161,8 @@ public class MainActivityTest {
 
         onView(withText(Constants.IMG_MSG))
                 .check(matches(isDisplayed()))
-            .perform(click());
+                .inRoot(isDialog())
+                .perform(click());
     }
 
     @Test
@@ -226,7 +229,9 @@ public class MainActivityTest {
                 .perform(scrollTo(), click());
 
         onView(withText(Constants.NAME_MSG))
-                .check(matches(isDisplayed()));
+                .check(matches(isDisplayed()))
+                .inRoot(isDialog())
+                .perform(click());
 
     }
 
@@ -271,6 +276,7 @@ public class MainActivityTest {
 
         onView(withText(Constants.EMAIL_MSG))
                 .check(matches(isDisplayed()))
+                .inRoot(isDialog())
                 .perform(click());
 
     }
@@ -316,6 +322,7 @@ public class MainActivityTest {
 
         onView(withText(Constants.DOB_MSG))
                 .check(matches(isDisplayed()))
+                .inRoot(isDialog())
                 .perform(click());
 
     }
@@ -416,6 +423,7 @@ public class MainActivityTest {
 
         onView(withText(Constants.DOB_MSG))
                 .check(matches(isDisplayed()))
+                .inRoot(isDialog())
                 .perform(click());
 
     }
