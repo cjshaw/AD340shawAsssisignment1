@@ -1,85 +1,57 @@
 package com.example.shawasssisignment1;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.view.ViewGroup;
+
 import android.widget.TextView;
 
 public class SecondActivity extends AppCompatActivity {
 
-    TextView ageName;
-    TextView job;
-    TextView desc;
-    Button  backBtn;
-    ImageView profileImg;
+    private static final String TAG = "SecondActivity";
 
-    /**
-     * onCreate function that displays message to user with information gathered from the form.
-     * @param savedInstanceState
-     */
+    private SectionPageAdapter mSectionsPageAdapter;
+    private ViewPager mViewPager;
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        ageName = findViewById(R.id.userAgeName);
-        job = findViewById(R.id.userOcc);
-        desc = findViewById(R.id.userDesc);
-        profileImg = findViewById(R.id.profileImg);
-        backBtn = findViewById(R.id.backBtn);
+        Log.d(TAG, "onCreate: Starting.");
 
-        StringBuilder ageNameMsg = new StringBuilder("");
-        StringBuilder occMsg = new StringBuilder("");
-        StringBuilder descMsg = new StringBuilder("");
-        Intent intent = getIntent();
-        Bundle b = intent.getExtras();
+        mSectionsPageAdapter = new SectionPageAdapter(getSupportFragmentManager());
 
-        assert b != null;
+        // Setting ViewPager for each Tabs
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(mViewPager);
 
-        Uri img = null;
-        if (b.containsKey(Constants.KEY_IMG)) {
-            img = b.getParcelable(Constants.KEY_IMG);
-        }
-        profileImg.setImageURI(img);
-
-        if (b.containsKey(Constants.KEY_AGE)) {
-            int userAge = b.getInt(Constants.KEY_AGE);
-            ageNameMsg.append(userAge).append(",\t\t");
-        }
-
-        if (b.containsKey(Constants.KEY_NAME)){
-            String name = b.getString(Constants.KEY_NAME);
-            ageNameMsg.append(name);
-        }
-        ageName.setText(ageNameMsg);
-
-        if (b.containsKey(Constants.KEY_OCC)) {
-            String occ = b.getString(Constants.KEY_OCC);
-            occMsg.append(occ);
-        }
-        job.setText(occMsg);
-
-        if (b.containsKey(Constants.KEY_DESC)){
-                String desc = b.getString(Constants.KEY_DESC);
-            descMsg.append(desc);
-            }
-        desc.setText(descMsg);
-
+        // Set Tabs inside Toolbar
+        TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
+        tabs.setupWithViewPager(mViewPager);
 
     }
-
-    /**
-     * goes back to MainActivity and clears the stack of activities
-     * @param v
-     */
-    public void goBack(View v){
-        Intent i = new Intent(this, MainActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(i);
+    // Add Fragments to Tabs
+    private void setupViewPager(ViewPager viewPager) {
+        SectionPageAdapter adapter = new SectionPageAdapter(getSupportFragmentManager());
+        adapter.addFragment(new ProfileTabFragment(), "Profile");
+        adapter.addFragment(new MatchesTabFragment(), "Matches");
+        adapter.addFragment(new SettingTabFragment(), "Settings");
+        viewPager.setAdapter(adapter);
     }
 
     /**
@@ -93,5 +65,6 @@ public class SecondActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-        }
+    }
+
 }
