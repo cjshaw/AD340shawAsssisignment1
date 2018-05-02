@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.scrollTo;
+import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withHint;
@@ -18,6 +18,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 public class SecondActivityTest {
+
     @Rule
     public ActivityTestRule<SecondActivity> activityTestRule
             = new ActivityTestRule<SecondActivity>(SecondActivity.class) {
@@ -58,30 +59,30 @@ public class SecondActivityTest {
                 .check(matches(isDisplayed()));
     }
 
+//    @Test
+//    public void testGoBackBtn() {
+//        onView(withId(R.id.backBtn))
+//                .perform(scrollTo(),click());
+//
+//        onView(withId(R.id.occEdit))
+//                .check(matches(withText("")));
+//
+//        onView(withId(R.id.nameEdit))
+//                .check(matches(withText("")));
+//
+//        onView(withId(R.id.emailEdit))
+//                .check(matches(withText("")));
+//
+//        onView(withId(R.id.descBox))
+//                .check(matches(withText("")));
+//
+//        onView(withId(R.id.birthdayEdit))
+//                .check(matches(withHint("Enter your birthday…")));
+//
+//    }
+
     @Test
-    public void testGoBackBtn() {
-        onView(withId(R.id.backBtn))
-                .perform(scrollTo(),click());
-
-        onView(withId(R.id.occEdit))
-                .check(matches(withText("")));
-
-        onView(withId(R.id.nameEdit))
-                .check(matches(withText("")));
-
-        onView(withId(R.id.emailEdit))
-                .check(matches(withText("")));
-
-        onView(withId(R.id.descBox))
-                .check(matches(withText("")));
-
-        onView(withId(R.id.birthdayEdit))
-                .check(matches(withHint("Enter your birthday…")));
-
-    }
-
-    @Test
-    public void test_backButton() {
+    public void testBackButton() {
         Espresso.pressBack();
 
         onView(withId(R.id.occEdit))
@@ -99,4 +100,47 @@ public class SecondActivityTest {
         onView(withId(R.id.birthdayEdit))
                 .check(matches(withHint("Enter your birthday…")));
     }
+
+
+        @Test
+        public void checkTabLayoutDisplayed() {
+            onView(withId(R.id.viewpager))
+                    .perform(click())
+                    .check(matches(isDisplayed()));
+        }
+
+        @Test
+    public void swipeThroughTabsTest() {
+        //Profile tab
+            onView(withId(R.id.userAgeName))
+                    .check(matches(withText("25,\t\tClint Shaw")));
+
+            onView(withId(R.id.userOcc))
+                    .check(matches(withText("test occupation")));
+
+            onView(withId(R.id.userDesc))
+                    .check(matches(withText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                            "Vestibulum eleifend odio volutpat nibh ultricies mattis. " +
+                            "Sed lobortis mauris ac turpis egestas, ut consequat ligula hendrerit. " +
+                            "Nullam tempus neque nec neque lacinia venenatis sit amet ornare dolor. " +
+                            "Praesent suscipit convallis orci sit amet fermentum. Mauris porta enim vitae congue ultricies. " +
+                            "Suspendisse elementum eleifend auctor. Sed commodo ante nec placerat aliquam.")));
+
+            onView(withId(R.id.profileImg))
+                    .check(matches(isDisplayed()));
+
+            onView(withId(R.id.viewpager))
+                    .perform(swipeLeft());
+
+            //Matches tab
+            onView(withId(R.id.matchesFrag))
+                    .check(matches(withText("This is the matches tab!")));
+
+            onView(withId(R.id.viewpager))
+                    .perform(swipeLeft());
+
+            //Settings tab
+            onView(withId(R.id.settingsFrag))
+                    .check(matches(withText("This is the settings tab!")));
+        }
 }
