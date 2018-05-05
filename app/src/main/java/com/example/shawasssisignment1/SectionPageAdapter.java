@@ -1,5 +1,6 @@
 package com.example.shawasssisignment1;
 
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +17,12 @@ public class SectionPageAdapter extends FragmentPagerAdapter {
     public void addFragment(Fragment fragment, String title) {
         mFragmentList.add(fragment);
         mFragmentTitleList.add(title);
+    }
+
+    public void addFragment(Fragment fragment, String title, Bundle b){
+        mFragmentList.add(fragment);
+        mFragmentTitleList.add(title);
+        fragment.setArguments(b);
     }
 
     public SectionPageAdapter(FragmentManager fm) {

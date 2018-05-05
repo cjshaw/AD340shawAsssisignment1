@@ -14,7 +14,7 @@
     <string name="tell_us_about_yourself">Tell us about yourself…</string>
     <string name="profile_pic2">Profile picture</string>
     <string name="this_is_the_settings_tab">This is the settings tab!</string>
-    <string name="this_is_the_matches_tab">This is the matches tab!</string>
+    <string name="card_name_like">You liked %1$s</string>
     <string name="settings">Settings</string>
 
 </resources>

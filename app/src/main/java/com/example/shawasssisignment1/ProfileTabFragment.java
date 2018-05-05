@@ -1,8 +1,8 @@
 package com.example.shawasssisignment1;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -24,7 +24,7 @@ public class ProfileTabFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View profileView = inflater.inflate(R.layout.profile_fragment, container, false);
 
         ageName = profileView.findViewById(R.id.userAgeName);
@@ -35,38 +35,26 @@ public class ProfileTabFragment extends Fragment {
         StringBuilder ageNameMsg = new StringBuilder("");
         StringBuilder occMsg = new StringBuilder("");
         StringBuilder descMsg = new StringBuilder("");
-        Intent intent = getActivity().getIntent();
-        Bundle b = intent.getExtras();
 
-        assert b != null;
+        Bundle arguments = getArguments();
 
-        Uri img = null;
-        if (b.containsKey(Constants.KEY_IMG)) {
-            img = b.getParcelable(Constants.KEY_IMG);
-        }
+        assert arguments != null;
+        Uri img = arguments.getParcelable(Constants.KEY_IMG);
         profileImg.setImageURI(img);
 
-        if (b.containsKey(Constants.KEY_AGE)) {
-            int userAge = b.getInt(Constants.KEY_AGE);
-            ageNameMsg.append(userAge).append(",\t\t");
-        }
+        int userAge = arguments.getInt(Constants.KEY_AGE);
+        ageNameMsg.append(userAge).append(",\t\t");
 
-        if (b.containsKey(Constants.KEY_NAME)){
-            String name = b.getString(Constants.KEY_NAME);
-            ageNameMsg.append(name);
-        }
+        String name = arguments.getString(Constants.KEY_NAME);
+        ageNameMsg.append(name);
         ageName.setText(ageNameMsg);
 
-        if (b.containsKey(Constants.KEY_OCC)) {
-            String occ = b.getString(Constants.KEY_OCC);
-            occMsg.append(occ);
-        }
+        String occ = arguments.getString(Constants.KEY_OCC);
+        occMsg.append(occ);
         job.setText(occMsg);
 
-        if (b.containsKey(Constants.KEY_DESC)){
-            String desc = b.getString(Constants.KEY_DESC);
-            descMsg.append(desc);
-        }
+        String description = arguments.getString(Constants.KEY_DESC);
+        descMsg.append(description);
         desc.setText(descMsg);
 
         return profileView;

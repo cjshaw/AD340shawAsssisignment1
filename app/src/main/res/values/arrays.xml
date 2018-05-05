@@ -1,0 +1,57 @@
+<resources>
+    <string-array name="matches_names">
+        <item>James Howlett</item>
+        <item>Jean Grey</item>
+        <item>Scott Summers</item>
+        <item>Jubilation Lee</item>
+        <item>Piotr Nikolaievitch </item>
+    </string-array>
+    <string-array name="matches_desc">
+        <item>
+            He\'s the best and what he does. But what he does isn\'t very nice.
+        </item>
+        <item>
+            Jean Grey is a member of a subspecies of humans known as mutants, who are born with
+            superhuman abilities. She was born with telepathic and telekinetic powers.
+            Her powers first manifested when she saw her childhood friend being hit by a car.
+            She is a caring, nurturing figure, but she also has to deal with being an Omega-level
+            mutant and the physical manifestation of the cosmic Phoenix Force. Jean Grey experienced
+            a transformation into the Phoenix in the X-Men storyline \"The Dark Phoenix Saga\". She has
+            faced death numerous times in the history of the series. Her first death was under her guise
+            as Marvel Girl, when she died and was \"reborn\" as Phoenix in \"The Dark Phoenix Saga\".
+            This transformation led to her second death, which was suicide, though not her last.
+        </item>
+        <item>
+            Cyclops is a member of a subspecies of humans known as mutants, who are born with
+            superhuman abilities. Cyclops can emit powerful beams of energy from his eyes.
+            He cannot control the beams without the aid of special eyewear which he must wear
+            at all times. He is typically considered the first of the X-Men,
+            a team of mutant heroes who fight for peace and equality between mutants and humans,
+            and one of the team\'s primary leaders.
+        </item>
+        <item>
+            Jubilee is a member of the human subspecies known as mutants, born with superhuman abilities.
+            She can generate pyrotechnic energy blasts from her hands. Introduced as an orphaned
+            \"mall rat\" from Beverly Hills, Jubilee joined the X-Men in the early 1990s,
+            becoming the team\'s youngest member and often playing a sidekick role to her
+            father-figure, Wolverine.
+        </item>
+        <item>
+            A Russian mutant, he is a member of the X-Men. Colossus is able to transform
+            himself into metallic form, making him the physically strongest of the team.
+            Even when his powers are not engaged, he is still a physically imposing figure
+            of 6 ft 7 in (200 cm). He is portrayed as quiet, honest, and virtuous.
+            He has had a fairly consistent presence in X-Men-related comic books since his debut.
+            A talented artist, he only reluctantly agrees to use his powers in combat,
+            feeling it is his responsibility to use his abilities for the betterment
+            of human and mutant-kind.
+        </item>
+    </string-array>
+    <array name="matches_picture">
+        <item>@drawable/wolverine</item>
+        <item>@drawable/jeangrey</item>
+        <item>@drawable/cyclops</item>
+        <item>@drawable/jubilee</item>
+        <item>@drawable/colossus</item>
+    </array>
+</resources>
