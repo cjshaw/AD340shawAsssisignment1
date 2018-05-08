@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -41,6 +42,7 @@ public class MatchesTabFragment extends Fragment {
         public TextView name;
         public TextView description;
         public ImageButton likeButton;
+        boolean flag = false;
 
         public ViewHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.matches_fragment, parent, false));
@@ -53,7 +55,14 @@ public class MatchesTabFragment extends Fragment {
             likeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(itemView.getContext(), "You liked " + name.getText().toString(), Toast.LENGTH_LONG).show();
+                    if(!flag) {
+                        Toast.makeText(itemView.getContext(), "You liked " + name.getText().toString(), Toast.LENGTH_LONG).show();
+                        flag = true;
+                        likeButton.setColorFilter(Color.RED);
+                    } else {
+                        flag = false;
+                        likeButton.setColorFilter(Color.GRAY);
+                    }
                 }
             });
         }
