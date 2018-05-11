@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         imageview = findViewById(R.id.selectedImg);
         description = findViewById(R.id.descBox);
 
-
     }
 
     /**
@@ -191,9 +190,6 @@ public class MainActivity extends AppCompatActivity {
             selectedImage = Uri.parse(savedInstanceState.getString(Constants.KEY_IMG));
             imageview.setImageURI(selectedImage);
 
-//            if(selectedImage != null) {
-//                Log.e(TAG, selectedImage.toString());
-//            }
         }
 
     }
@@ -212,9 +208,6 @@ public class MainActivity extends AppCompatActivity {
             outState.putString(Constants.KEY_IMG, selectedImage.toString());
         }
 
-//        if(selectedImage != null) {
-//            Log.e(TAG, selectedImage.toString());
-//        }
     }
 
 }

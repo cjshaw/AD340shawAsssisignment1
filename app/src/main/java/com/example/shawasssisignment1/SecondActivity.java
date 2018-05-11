@@ -3,11 +3,13 @@ package com.example.shawasssisignment1;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,16 +31,14 @@ public class SecondActivity extends AppCompatActivity {
         mSectionsPageAdapter = new SectionPageAdapter(getSupportFragmentManager());
 
         // Setting ViewPager for each Tabs
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        mViewPager = findViewById(R.id.viewpager);
         setupViewPager(mViewPager);
 
         // Set Tabs inside Toolbar
-        TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(mViewPager);
+            }
 
-
-
-    }
     // Add Fragments to Tabs
     private void setupViewPager(ViewPager viewPager) {
         SectionPageAdapter adapter = new SectionPageAdapter(getSupportFragmentManager());
@@ -46,12 +46,6 @@ public class SecondActivity extends AppCompatActivity {
         adapter.addFragment(new MatchesTabFragment(), "Matches");
         adapter.addFragment(new SettingTabFragment(), "Settings");
         viewPager.setAdapter(adapter);
-    }
-
-    public void sendUserInputToProfile(View v) {
-
-
-
     }
 
     /**

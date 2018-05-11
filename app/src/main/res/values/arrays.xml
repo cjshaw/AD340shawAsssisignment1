@@ -30,4 +30,11 @@
         <item>@drawable/jubilee</item>
         <item>@drawable/colossus</item>
     </array>
+    <array name="likes">
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+    </array>
 </resources>

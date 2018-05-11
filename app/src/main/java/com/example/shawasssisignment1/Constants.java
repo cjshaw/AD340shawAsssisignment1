@@ -7,12 +7,12 @@ public class Constants {
 
     //Keys for bundled extras
     static final String KEY_NAME = "name";
-    static final String KEY_USERNAME = "username";
     static final String KEY_BDAY_BTN_TXT = "bday_btn_txt";
     static final String KEY_IMG = "profile_img";
     static final String KEY_AGE = "user_age";
     static final String KEY_DESC = "user_description";
     static final String KEY_OCC = "user_occupation";
+    static final String KEY_RV_STATE = "recycleview_state";
 
     //messages
     static final String OCC_MSG = "You gotta have a job to get a date.";
