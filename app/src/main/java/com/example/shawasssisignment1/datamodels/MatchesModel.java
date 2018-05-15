@@ -1,9 +1,5 @@
 package com.example.shawasssisignment1.datamodels;
 
-import android.content.ContentValues;
-import android.nfc.Tag;
-import android.util.Log;
-
 import com.example.shawasssisignment1.model.Matches;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,11 +16,9 @@ public class MatchesModel {
     private DatabaseReference mDatabase;
     private HashMap<DatabaseReference, ValueEventListener> listeners;
 
-    private static final String TAG = "matchesModel";
     public MatchesModel() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         listeners = new HashMap<>();
-
     }
 
     public void addMatchesItem(Matches item) {

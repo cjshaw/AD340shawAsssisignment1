@@ -15,7 +15,7 @@ import com.example.shawasssisignment1.viewmodels.MatchesViewModel;
 
 import java.util.ArrayList;
 
-import static com.example.shawasssisignment1.MatchesTabFragment.ARG_DATA_SET;
+import static com.example.shawasssisignment1.MatchesTabFragment.ARG_MATCHES_SET;
 
 public class SecondActivity extends AppCompatActivity implements MatchesTabFragment.OnListFragmentInteractionListener {
 
@@ -29,9 +29,8 @@ public class SecondActivity extends AppCompatActivity implements MatchesTabFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        Log.d(TAG, "onCreate: Starting.");
-        mSectionsPageAdapter = new SectionPageAdapter(getSupportFragmentManager());
 
+        mSectionsPageAdapter = new SectionPageAdapter(getSupportFragmentManager());
 
         // Setting ViewPager for each Tabs
         mViewPager = findViewById(R.id.viewpager);

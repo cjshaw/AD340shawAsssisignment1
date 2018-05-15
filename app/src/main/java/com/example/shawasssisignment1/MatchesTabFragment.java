@@ -18,13 +18,12 @@ import java.util.List;
 
 public class MatchesTabFragment extends Fragment {
 
-    public static final String ARG_COLUMN_COUNT = "column-count";
-    public static final String ARG_DATA_SET = "matches";
+    public static final String ARG_COLUMN_COUNT = "column-count"; // unsure what this is for
+    public static final String ARG_MATCHES_SET = "matches";
 
     private int mColumnCount = 6;
     private List<Matches> mDataSet;
     private OnListFragmentInteractionListener mListener;
-    private MatchesViewModel viewModel;
 
     public MatchesTabFragment(){
 
@@ -45,7 +44,7 @@ public class MatchesTabFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if(getArguments() != null) {
-            mDataSet = getArguments().getParcelableArrayList(ARG_DATA_SET);
+            mDataSet = getArguments().getParcelableArrayList(ARG_MATCHES_SET);
         }
     }
 
@@ -55,25 +54,24 @@ public class MatchesTabFragment extends Fragment {
         RecyclerView view = (RecyclerView) inflater.inflate(
                 R.layout.recycleviewer, container, false);
 
-        viewModel = new MatchesViewModel();
+       MatchesViewModel viewModel = new MatchesViewModel();
+        
         viewModel.getMatchesItems(
                 (ArrayList<Matches> matches) -> {
-
                     Bundle bundle = new Bundle();
-                    bundle.putParcelableArrayList(ARG_DATA_SET, matches);
+                    bundle.putParcelableArrayList(ARG_MATCHES_SET, matches);
 
                     MatchesTabFragment matchesTabFragment = new MatchesTabFragment();
                     matchesTabFragment.setArguments(bundle);
 
+                    MatchesRecyclerViewAdapter adapter = new MatchesRecyclerViewAdapter(matches, mListener);
+                    view.setAdapter(adapter);
+                    view.setHasFixedSize(true);
+
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+                    view.setLayoutManager(layoutManager);
                 }
         );
-
-        MatchesRecyclerViewAdapter adapter = new MatchesRecyclerViewAdapter(mDataSet, mListener);
-        view.setAdapter(adapter);
-        view.setHasFixedSize(true);
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        view.setLayoutManager(layoutManager);
 
         return view;
     }
@@ -96,7 +94,6 @@ public class MatchesTabFragment extends Fragment {
     }
 
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onListFragmentInteraction(Matches item);
     }
 }

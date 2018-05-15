@@ -23,14 +23,14 @@ public class MatchesViewModel {
     public void getMatchesItems(Consumer<ArrayList<Matches>> responseCallback) {
         matchesModel.getMatchesItems(
                 (DataSnapshot dataSnapshot) -> {
-                    ArrayList<Matches> matches = new ArrayList<>();
+                    ArrayList<Matches> matchesArr = new ArrayList<>();
                     for (DataSnapshot matchesSnapshot : dataSnapshot.getChildren()) {
                         Matches item = matchesSnapshot.getValue(Matches.class);
                         assert item != null;
                         item.uid = matchesSnapshot.getKey();
-                        matches.add(item);
+                        matchesArr.add(item);
                     }
-                    responseCallback.accept(matches);
+                    responseCallback.accept(matchesArr);
                 },
                 (databaseError -> System.out.println("Error reading Matches Items: " + databaseError))
         );

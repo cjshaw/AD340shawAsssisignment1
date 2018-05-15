@@ -47,10 +47,10 @@ public class Matches implements Parcelable {
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
+        result.put("uid", uid);
         result.put("imageUrl", imageUrl);
         result.put("liked", liked);
         result.put("name", name);
-        result.put("uid", uid);
 
         return result;
     }
