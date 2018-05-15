@@ -3,32 +3,35 @@ package com.example.shawasssisignment1;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-public class SecondActivity extends AppCompatActivity {
+import com.example.shawasssisignment1.model.Matches;
+import com.example.shawasssisignment1.viewmodels.MatchesViewModel;
+
+import java.util.ArrayList;
+
+import static com.example.shawasssisignment1.MatchesTabFragment.ARG_DATA_SET;
+
+public class SecondActivity extends AppCompatActivity implements MatchesTabFragment.OnListFragmentInteractionListener {
 
     private static final String TAG = "SecondActivity";
 
     private SectionPageAdapter mSectionsPageAdapter;
     private ViewPager mViewPager;
+    private MatchesViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         Log.d(TAG, "onCreate: Starting.");
-
         mSectionsPageAdapter = new SectionPageAdapter(getSupportFragmentManager());
+
 
         // Setting ViewPager for each Tabs
         mViewPager = findViewById(R.id.viewpager);
@@ -37,7 +40,8 @@ public class SecondActivity extends AppCompatActivity {
         // Set Tabs inside Toolbar
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(mViewPager);
-            }
+    }
+
 
     // Add Fragments to Tabs
     private void setupViewPager(ViewPager viewPager) {
@@ -61,4 +65,15 @@ public class SecondActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onListFragmentInteraction(Matches item) {
+        item.liked = true;
+        viewModel.updateMatchesItem(item);
+    }
+
+    @Override
+    protected void onPause() {
+        viewModel.clear();
+        super.onPause();
+    }
 }

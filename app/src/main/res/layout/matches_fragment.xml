@@ -28,8 +28,9 @@
             android:layout_height="@dimen/card_title_height"
             android:layout_alignBottom="@+id/card_image"
             android:layout_marginStart="@dimen/md_keylines"
+            android:text="[NAME GOES HERE]"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="#FFFFFF" />
+            android:textColor="#ce0000" />
 
         <TextView
             android:id="@+id/card_text"
@@ -55,7 +56,6 @@
             android:clickable="true"
             style="?android:attr/borderlessButtonStyle"
             android:tint="#757575" />
-
 
     </RelativeLayout>
 
