@@ -75,31 +75,31 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onSubmit(View v) {
         //if all input is correct, submits view
-        if (!editOcc.getText().toString().trim().isEmpty() && getAge() >= Constants.MIN_AGE
+        if (!editOcc.getText().toString().trim().isEmpty() && getAge() >= MyConstants.MIN_AGE
                 && validate(editEmail.getText().toString()) && !editName.getText().toString().trim().isEmpty()
                 && selectedImage != null) {
             Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-            intent.putExtra(Constants.KEY_IMG, selectedImage);
-            intent.putExtra(Constants.KEY_OCC, editOcc.getText().toString());
-            intent.putExtra(Constants.KEY_AGE, getAge());
-            intent.putExtra(Constants.KEY_DESC, description.getText().toString());
-            intent.putExtra(Constants.KEY_NAME, editName.getText().toString());
+            intent.putExtra(MyConstants.KEY_IMG, selectedImage);
+            intent.putExtra(MyConstants.KEY_OCC, editOcc.getText().toString());
+            intent.putExtra(MyConstants.KEY_AGE, getAge());
+            intent.putExtra(MyConstants.KEY_DESC, description.getText().toString());
+            intent.putExtra(MyConstants.KEY_NAME, editName.getText().toString());
 
             startActivity(intent);
             //checks for empty occupation field
         } else if (editOcc.getText().toString().trim().isEmpty()) {
-            dialogueAlert(Constants.OCC_MSG);
+            dialogueAlert(MyConstants.OCC_MSG);
             //checks for age
         } else if (getAge() < 18) {
-            dialogueAlert(Constants.DOB_MSG);
+            dialogueAlert(MyConstants.DOB_MSG);
             //uses regex to check for valid emails.
         } else if (!validate(editEmail.getText().toString())) {
-            dialogueAlert(Constants.EMAIL_MSG);
+            dialogueAlert(MyConstants.EMAIL_MSG);
             //checks for empty name
         } else if (editName.getText().toString().trim().isEmpty()) {
-            dialogueAlert(Constants.NAME_MSG);
+            dialogueAlert(MyConstants.NAME_MSG);
         } else if(selectedImage == null) {
-            dialogueAlert(Constants.IMG_MSG);
+            dialogueAlert(MyConstants.IMG_MSG);
         }
     }
 
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
      * @return boolean
      */
     public static boolean validate(String emailStr) {
-        Matcher matcher = Constants.VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+        Matcher matcher = MyConstants.VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
         return matcher.find();
     }
 
@@ -181,13 +181,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        if (savedInstanceState.containsKey(Constants.KEY_BDAY_BTN_TXT)) {
-            birthdayEdit.setText((String) savedInstanceState.get(Constants.KEY_BDAY_BTN_TXT));
+        if (savedInstanceState.containsKey(MyConstants.KEY_BDAY_BTN_TXT)) {
+            birthdayEdit.setText((String) savedInstanceState.get(MyConstants.KEY_BDAY_BTN_TXT));
         }
 
-        if (savedInstanceState.containsKey(Constants.KEY_IMG)) {
+        if (savedInstanceState.containsKey(MyConstants.KEY_IMG)) {
             imageview.setVisibility(View.VISIBLE);
-            selectedImage = Uri.parse(savedInstanceState.getString(Constants.KEY_IMG));
+            selectedImage = Uri.parse(savedInstanceState.getString(MyConstants.KEY_IMG));
             imageview.setImageURI(selectedImage);
 
         }
@@ -202,10 +202,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(Constants.KEY_BDAY_BTN_TXT, birthdayEdit.getText().toString());
+        outState.putString(MyConstants.KEY_BDAY_BTN_TXT, birthdayEdit.getText().toString());
 
         if(selectedImage != null) {
-            outState.putString(Constants.KEY_IMG, selectedImage.toString());
+            outState.putString(MyConstants.KEY_IMG, selectedImage.toString());
         }
 
     }

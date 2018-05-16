@@ -39,21 +39,21 @@ public class ProfileTabFragment extends Fragment {
         Bundle arguments = getArguments();
 
         assert arguments != null;
-        Uri img = arguments.getParcelable(Constants.KEY_IMG);
+        Uri img = arguments.getParcelable(MyConstants.KEY_IMG);
         profileImg.setImageURI(img);
 
-        int userAge = arguments.getInt(Constants.KEY_AGE);
+        int userAge = arguments.getInt(MyConstants.KEY_AGE);
         ageNameMsg.append(userAge).append(",\t\t");
 
-        String name = arguments.getString(Constants.KEY_NAME);
+        String name = arguments.getString(MyConstants.KEY_NAME);
         ageNameMsg.append(name);
         ageName.setText(ageNameMsg);
 
-        String occ = arguments.getString(Constants.KEY_OCC);
+        String occ = arguments.getString(MyConstants.KEY_OCC);
         occMsg.append(occ);
         job.setText(occMsg);
 
-        String description = arguments.getString(Constants.KEY_DESC);
+        String description = arguments.getString(MyConstants.KEY_DESC);
         descMsg.append(description);
         desc.setText(descMsg);
 
