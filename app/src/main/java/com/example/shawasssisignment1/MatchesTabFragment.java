@@ -94,12 +94,6 @@ public class MatchesTabFragment extends Fragment {
         mListener = null;
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        recylerViewState = view.getLayoutManager().onSaveInstanceState();
-    }
-
     public interface OnListFragmentInteractionListener {
         void onListFragmentInteraction(Matches item);
     }
