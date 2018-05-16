@@ -70,7 +70,9 @@ public class SecondActivity extends AppCompatActivity implements MatchesTabFragm
 
     @Override
     protected void onPause() {
-        viewModel.clear();
+        if (viewModel != null) {
+            viewModel.clear();
+        }
         super.onPause();
     }
 }

@@ -41,7 +41,7 @@ public class MainActivityTest {
             = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void canSubmitWithRotate() { ;
+    public void canSubmitWithRotate() {
 
         onView(withId(R.id.nameEdit))
                 .perform(typeText("Clint Shaw"));
