@@ -135,31 +135,31 @@ public class SecondActivityTest {
         onView(withId(R.id.my_recycler_view)).perform(
                 RecyclerViewActions.actionOnItemAtPosition(0, TestUtils.clickChildViewWithId(R.id.like_button)));
         //check toast text
-        onView(withText("You liked James Howlett")).
+        onView(withText("You liked Cool Guy Mike")).
                 inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
                 check(matches(isDisplayed()));
 
         onView(withId(R.id.my_recycler_view)).perform(
                 RecyclerViewActions.actionOnItemAtPosition(1, TestUtils.clickChildViewWithId(R.id.like_button)));
-        onView(withText("You liked Jean Grey")).
+        onView(withText("You liked Mark the King")).
                 inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
                 check(matches(isDisplayed()));
 
         onView(withId(R.id.my_recycler_view)).perform(
                 RecyclerViewActions.actionOnItemAtPosition(2, TestUtils.clickChildViewWithId(R.id.like_button)));
-        onView(withText("You liked Scott Summers")).
+        onView(withText("You liked Overachiever Alex")).
                 inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
                 check(matches(isDisplayed()));
 
         onView(withId(R.id.my_recycler_view)).perform(
                 RecyclerViewActions.actionOnItemAtPosition(3, TestUtils.clickChildViewWithId(R.id.like_button)));
-        onView(withText("You liked Jubilation Lee")).
+        onView(withText("You liked Iceman Judah")).
                 inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
                 check(matches(isDisplayed()));
 
         onView(withId(R.id.my_recycler_view)).perform(
                 RecyclerViewActions.actionOnItemAtPosition(4, TestUtils.clickChildViewWithId(R.id.like_button)));
-        onView(withText("You liked Piotr Nikolaievitch")).
+        onView(withText("You liked Money man Ben")).
                 inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
                 check(matches(isDisplayed()));
     }
@@ -173,68 +173,31 @@ public class SecondActivityTest {
 
         onView(withRecyclerView(R.id.my_recycler_view)
                 .atPositionOnView(0, R.id.card_title))
-                .check(matches(withText("James Howlett")));
+                .check(matches(withText("Cool Guy Mike")));
 
         onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(1));
 
         onView(withRecyclerView(R.id.my_recycler_view)
                 .atPositionOnView(1, R.id.card_title))
-                .check(matches(withText("Jean Grey")));
+                .check(matches(withText("Mark the King")));
 
         onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(2));
 
         onView(withRecyclerView(R.id.my_recycler_view)
                 .atPositionOnView(2, R.id.card_title))
-                .check(matches(withText("Scott Summers")));
+                .check(matches(withText("Overachiever Alex")));
 
         onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(3));
 
         onView(withRecyclerView(R.id.my_recycler_view)
                 .atPositionOnView(3, R.id.card_title))
-                .check(matches(withText("Jubilation Lee")));
+                .check(matches(withText("Iceman Judah")));
 
         onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(4));
 
         onView(withRecyclerView(R.id.my_recycler_view)
                 .atPositionOnView(4, R.id.card_title))
-                .check(matches(withText("Piotr Nikolaievitch")));
-
-    }
-
-    @Test
-    public void testDescOnCard() {
-
-        //swipe to matches tab
-        onView(withId(R.id.viewpager))
-                .perform(swipeLeft());
-
-        onView(withRecyclerView(R.id.my_recycler_view)
-                .atPositionOnView(0, R.id.card_text))
-                .check(matches(withText("He's the best and what he does. But what he does isn't very nice.")));
-
-        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(1));
-
-        onView(withRecyclerView(R.id.my_recycler_view)
-                .atPositionOnView(1, R.id.card_text))
-                .check(matches(withText("Jean Grey is a member of a subspecies of humans known as mutants, who are born with superhuman abilities. She was born with telepathic and telekinetic powers.")));
-
-        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(2));
-
-        onView(withRecyclerView(R.id.my_recycler_view)
-                .atPositionOnView(2, R.id.card_text))
-                .check(matches(withText("Cyclops is a member of a subspecies of humans known as mutants, who are born with superhuman abilities. Cyclops can emit powerful beams of energy from his eyes.")));
-
-        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(3));
-
-        onView(withRecyclerView(R.id.my_recycler_view)
-                .atPositionOnView(3, R.id.card_text))
-                .check(matches(withText("Jubilee is a member of the human subspecies known as mutants, born with superhuman abilities. She can generate pyrotechnic energy blasts from her hands.")));
-
-        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(4));
-
-        onView(withRecyclerView(R.id.my_recycler_view)
-                .atPositionOnView(4, R.id.card_text))
-                .check(matches(withText("A Russian mutant, he is a member of the X-Men. Colossus is able to transform himself into metallic form, making him the physically strongest of the team.")));
+                .check(matches(withText("Money man Ben")));
 
     }
 

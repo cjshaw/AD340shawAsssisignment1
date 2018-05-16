@@ -2,6 +2,7 @@ package com.example.shawasssisignment1;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +25,8 @@ public class MatchesTabFragment extends Fragment {
     private int mColumnCount = 6;
     private List<Matches> mDataSet;
     private OnListFragmentInteractionListener mListener;
+    private RecyclerView view;
+    private Parcelable recylerViewState;
 
     public MatchesTabFragment(){
 
@@ -51,7 +54,7 @@ public class MatchesTabFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@Nullable LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        RecyclerView view = (RecyclerView) inflater.inflate(
+        view = (RecyclerView) inflater.inflate(
                 R.layout.recycleviewer, container, false);
 
        MatchesViewModel viewModel = new MatchesViewModel();
@@ -64,6 +67,9 @@ public class MatchesTabFragment extends Fragment {
                     view.setHasFixedSize(true);
 
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+                    if (recylerViewState != null) {
+                        view.getLayoutManager().onRestoreInstanceState(recylerViewState);
+                    }
                     view.setLayoutManager(layoutManager);
                 }
         );
@@ -86,6 +92,12 @@ public class MatchesTabFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        recylerViewState = view.getLayoutManager().onSaveInstanceState();
     }
 
     public interface OnListFragmentInteractionListener {
