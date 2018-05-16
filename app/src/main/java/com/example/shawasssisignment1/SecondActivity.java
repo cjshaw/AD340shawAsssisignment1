@@ -58,6 +58,7 @@ public class SecondActivity extends AppCompatActivity implements MatchesTabFragm
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 
     @Override
@@ -70,9 +71,7 @@ public class SecondActivity extends AppCompatActivity implements MatchesTabFragm
 
     @Override
     protected void onPause() {
-        if (viewModel != null) {
-            viewModel.clear();
-        }
+        viewModel.clear();
         super.onPause();
     }
 }
