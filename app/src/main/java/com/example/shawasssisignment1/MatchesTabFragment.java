@@ -58,11 +58,6 @@ public class MatchesTabFragment extends Fragment {
         
         viewModel.getMatchesItems(
                 (ArrayList<Matches> matches) -> {
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelableArrayList(ARG_MATCHES_SET, matches);
-
-                    MatchesTabFragment matchesTabFragment = new MatchesTabFragment();
-                    matchesTabFragment.setArguments(bundle);
 
                     MatchesRecyclerViewAdapter adapter = new MatchesRecyclerViewAdapter(matches, mListener);
                     view.setAdapter(adapter);

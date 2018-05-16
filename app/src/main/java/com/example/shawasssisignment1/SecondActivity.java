@@ -1,21 +1,16 @@
 package com.example.shawasssisignment1;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.widget.Toast;
 
 import com.example.shawasssisignment1.model.Matches;
 import com.example.shawasssisignment1.viewmodels.MatchesViewModel;
-
-import java.util.ArrayList;
-
-import static com.example.shawasssisignment1.MatchesTabFragment.ARG_MATCHES_SET;
 
 public class SecondActivity extends AppCompatActivity implements MatchesTabFragment.OnListFragmentInteractionListener {
 
@@ -30,6 +25,7 @@ public class SecondActivity extends AppCompatActivity implements MatchesTabFragm
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
+        viewModel = new MatchesViewModel();
         mSectionsPageAdapter = new SectionPageAdapter(getSupportFragmentManager());
 
         // Setting ViewPager for each Tabs
@@ -66,7 +62,9 @@ public class SecondActivity extends AppCompatActivity implements MatchesTabFragm
 
     @Override
     public void onListFragmentInteraction(Matches item) {
-        item.liked = true;
+        item.liked = !item.liked;
+        Context context = getApplicationContext();
+        Toast.makeText(context, "You liked " + item.name, Toast.LENGTH_LONG).show();
         viewModel.updateMatchesItem(item);
     }
 
