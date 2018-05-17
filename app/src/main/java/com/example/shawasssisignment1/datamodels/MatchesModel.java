@@ -21,11 +21,6 @@ public class MatchesModel {
         listeners = new HashMap<>();
     }
 
-    public void addMatchesItem(Matches item) {
-        DatabaseReference matchesItemsRef = mDatabase.child("matches");
-        matchesItemsRef.push().setValue(item);
-    }
-
     public void getMatchesItems(Consumer<DataSnapshot> dataChangedCallback, Consumer<DatabaseError> dataErrorCallback) {
         DatabaseReference matchesItemsRef = mDatabase.child("matches");
         ValueEventListener matchesItemsListener = new ValueEventListener() {

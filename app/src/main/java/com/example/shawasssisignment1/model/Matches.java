@@ -32,6 +32,18 @@ public class Matches implements Parcelable {
         liked = in.readByte() != 0;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public boolean isLiked() {
+        return liked;
+    }
+
     public static final Creator<Matches> CREATOR = new Creator<Matches>() {
         @Override
         public Matches createFromParcel(Parcel in) {

@@ -16,10 +16,6 @@ public class MatchesViewModel {
         matchesModel = new MatchesModel();
     }
 
-    public void addMatchesItem(Matches item) {
-        matchesModel.addMatchesItem(item);
-    }
-
     public void getMatchesItems(Consumer<ArrayList<Matches>> responseCallback) {
         matchesModel.getMatchesItems(
                 (DataSnapshot dataSnapshot) -> {
