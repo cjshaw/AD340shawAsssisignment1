@@ -1,13 +1,11 @@
 package com.example.shawasssisignment1;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import com.example.shawasssisignment1.model.Matches;
 import com.example.shawasssisignment1.viewmodels.MatchesViewModel;
@@ -68,9 +66,6 @@ public class SecondActivity extends AppCompatActivity implements MatchesTabFragm
         } else {
             item.liked = false;
         }
-
-        Context context = getApplicationContext();
-
         viewModel.updateMatchesItem(item);
     }
 

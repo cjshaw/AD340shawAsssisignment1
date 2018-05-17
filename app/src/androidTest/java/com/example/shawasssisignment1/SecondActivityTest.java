@@ -22,6 +22,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.example.shawasssisignment1.TestUtils.withRecyclerView;
 
 import com.example.shawasssisignment1.model.Matches;
+
+import java.util.List;
+
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
 
@@ -126,52 +129,52 @@ public class SecondActivityTest {
                 .check(matches(withText("This is the settings tab!")));
     }
 
-//    @Test
-//    public void testLikeToast() {
-//        SecondActivity activity = activityTestRule.getActivity();
-//
-//        //swipe to matches tab
-//        onView(withId(R.id.viewpager))
-//                .perform(swipeLeft());
-//
-//        //click like button
-//        onView(withId(R.id.my_recycler_view)).perform(
-//                RecyclerViewActions.actionOnItemAtPosition(0, TestUtils.clickChildViewWithId(R.id.like_button)));
+    @Test
+    public void testLikeBtn() {
+        SecondActivity activity = activityTestRule.getActivity();
+
+        //swipe to matches tab
+        onView(withId(R.id.viewpager))
+                .perform(swipeLeft());
+
+        //click like button
+        onView(withId(R.id.my_recycler_view)).perform(
+                RecyclerViewActions.actionOnItemAtPosition(0, TestUtils.clickChildViewWithId(R.id.like_button)));
 //        //check toast text
 //        onView(withText("You liked Cool Guy Mike")).
 //                inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
 //                check(matches(isDisplayed()));
-//
-//        onView(withId(R.id.my_recycler_view)).perform(
-//                RecyclerViewActions.actionOnItemAtPosition(1, TestUtils.clickChildViewWithId(R.id.like_button)));
+
+        onView(withId(R.id.my_recycler_view)).perform(
+                RecyclerViewActions.actionOnItemAtPosition(1, TestUtils.clickChildViewWithId(R.id.like_button)));
 //        onView(withText("You liked Mark the King")).
 //                inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
 //                check(matches(isDisplayed()));
-//
-//        onView(withId(R.id.my_recycler_view)).perform(
-//                RecyclerViewActions.actionOnItemAtPosition(2, TestUtils.clickChildViewWithId(R.id.like_button)));
+
+        onView(withId(R.id.my_recycler_view)).perform(
+                RecyclerViewActions.actionOnItemAtPosition(2, TestUtils.clickChildViewWithId(R.id.like_button)));
 //        onView(withText("You liked Overachiever Alex")).
 //                inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
 //                check(matches(isDisplayed()));
-//
-//        onView(withId(R.id.my_recycler_view)).perform(
-//                RecyclerViewActions.actionOnItemAtPosition(3, TestUtils.clickChildViewWithId(R.id.like_button)));
+
+        onView(withId(R.id.my_recycler_view)).perform(
+                RecyclerViewActions.actionOnItemAtPosition(3, TestUtils.clickChildViewWithId(R.id.like_button)));
 //        onView(withText("You liked Iceman Judah")).
 //                inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
 //                check(matches(isDisplayed()));
-//
-//        onView(withId(R.id.my_recycler_view)).perform(
-//                RecyclerViewActions.actionOnItemAtPosition(4, TestUtils.clickChildViewWithId(R.id.like_button)));
+
+        onView(withId(R.id.my_recycler_view)).perform(
+                RecyclerViewActions.actionOnItemAtPosition(4, TestUtils.clickChildViewWithId(R.id.like_button)));
 //        onView(withText("You liked Hayden the Wrestler")).
 //                inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
 //                check(matches(isDisplayed()));
-//
-//        onView(withId(R.id.my_recycler_view)).perform(
-//                RecyclerViewActions.actionOnItemAtPosition(5, TestUtils.clickChildViewWithId(R.id.like_button)));
+
+        onView(withId(R.id.my_recycler_view)).perform(
+                RecyclerViewActions.actionOnItemAtPosition(5, TestUtils.clickChildViewWithId(R.id.like_button)));
 //        onView(withText("You liked Money man Ben")).
 //                inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
 //                check(matches(isDisplayed()));
-//    }
+    }
 
     @Test
     public void testNameOnCard() {
@@ -242,6 +245,15 @@ public class SecondActivityTest {
         assertEquals(false, testMatches.isLiked());
         assertEquals("www.getpicture.com", testMatches.getImageUrl());
         assertEquals(0, testMatches.describeContents());
+    }
+
+    @Test
+    public void testAdapterGetItemCountForNull() {
+        List<Matches> testList = null;
+        MatchesTabFragment.OnListFragmentInteractionListener testListener = null;
+        MatchesRecyclerViewAdapter testAdapter = new MatchesRecyclerViewAdapter(testList, testListener);
+
+        assertEquals(0, testAdapter.getItemCount());
     }
 
     @Test
