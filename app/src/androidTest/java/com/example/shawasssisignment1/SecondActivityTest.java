@@ -217,6 +217,7 @@ public class SecondActivityTest {
         assertEquals("Please enter a name!", MyConstants.NAME_MSG);
         assertEquals("Your age is: ", MyConstants.AGE_MSG);
         assertEquals("Please select a photo", MyConstants.IMG_MSG);
+        
     }
 
     @Test
