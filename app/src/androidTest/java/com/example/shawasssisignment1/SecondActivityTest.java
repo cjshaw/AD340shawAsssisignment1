@@ -160,6 +160,12 @@ public class SecondActivityTest {
 
         onView(withId(R.id.my_recycler_view)).perform(
                 RecyclerViewActions.actionOnItemAtPosition(4, TestUtils.clickChildViewWithId(R.id.like_button)));
+        onView(withText("You liked Hayden the Wrestler")).
+                inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
+                check(matches(isDisplayed()));
+
+        onView(withId(R.id.my_recycler_view)).perform(
+                RecyclerViewActions.actionOnItemAtPosition(5, TestUtils.clickChildViewWithId(R.id.like_button)));
         onView(withText("You liked Money man Ben")).
                 inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
                 check(matches(isDisplayed()));
@@ -198,6 +204,12 @@ public class SecondActivityTest {
 
         onView(withRecyclerView(R.id.my_recycler_view)
                 .atPositionOnView(4, R.id.card_title))
+                .check(matches(withText("Hayden the Wrestler")));
+
+        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(5));
+
+        onView(withRecyclerView(R.id.my_recycler_view)
+                .atPositionOnView(5, R.id.card_title))
                 .check(matches(withText("Money man Ben")));
 
     }
@@ -217,7 +229,7 @@ public class SecondActivityTest {
         assertEquals("Please enter a name!", MyConstants.NAME_MSG);
         assertEquals("Your age is: ", MyConstants.AGE_MSG);
         assertEquals("Please select a photo", MyConstants.IMG_MSG);
-        
+
     }
 
     @Test
@@ -253,6 +265,12 @@ public class SecondActivityTest {
 
         onView(withRecyclerView(R.id.my_recycler_view)
                 .atPositionOnView(4, R.id.card_image))
+                .check(matches(isDisplayed()));
+
+        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(5));
+
+        onView(withRecyclerView(R.id.my_recycler_view)
+                .atPositionOnView(5, R.id.card_image))
                 .check(matches(isDisplayed()));
 
     }

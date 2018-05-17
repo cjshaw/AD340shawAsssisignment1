@@ -43,6 +43,7 @@ public class MatchesRecyclerViewAdapter extends RecyclerView.Adapter<MatchesRecy
         holder.mImgUrl = mValues.get(position).imageUrl; // get image URL from object
         Picasso.get().load(holder.mImgUrl).into(holder.mImage); // set image url into ImageView
         holder.liked = mValues.get(position).liked;
+
         if (!holder.liked) {
             holder.likeBtn.setColorFilter(Color.GRAY);
         } else {
@@ -53,6 +54,12 @@ public class MatchesRecyclerViewAdapter extends RecyclerView.Adapter<MatchesRecy
             if (null != mListener) {
                 // Notify the active callbacks interface (the activity, if the
                 // fragment is attached to one) that an item has been selected.
+                if (!holder.liked) {
+                    Toast.makeText(holder.mView.getContext(), "You liked " + mValues.get(position).name, Toast.LENGTH_LONG).show();
+                    holder.likeBtn.setColorFilter(Color.RED);
+                } else {
+                    holder.likeBtn.setColorFilter(Color.GRAY);
+                }
                 mListener.onListFragmentInteraction(holder.mItem);
             }
         });

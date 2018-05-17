@@ -63,9 +63,14 @@ public class SecondActivity extends AppCompatActivity implements MatchesTabFragm
 
     @Override
     public void onListFragmentInteraction(Matches item) {
-        item.liked = !item.liked;
+        if (!item.liked) {
+            item.liked = true;
+        } else {
+            item.liked = false;
+        }
+
         Context context = getApplicationContext();
-        Toast.makeText(context, "You liked " + item.name, Toast.LENGTH_LONG).show();
+
         viewModel.updateMatchesItem(item);
     }
 
