@@ -30,16 +30,16 @@ public class SecondActivityTest {
         @Override
         protected Intent getActivityIntent() {
             Intent testIntent = new Intent();
-            testIntent.putExtra(Constants.KEY_NAME, "Clint Shaw");
-            testIntent.putExtra(Constants.KEY_OCC, "test occupation");
-            testIntent.putExtra(Constants.KEY_DESC, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+            testIntent.putExtra(MyConstants.KEY_NAME, "Clint Shaw");
+            testIntent.putExtra(MyConstants.KEY_OCC, "test occupation");
+            testIntent.putExtra(MyConstants.KEY_DESC, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
                     "Vestibulum eleifend odio volutpat nibh ultricies mattis. " +
                     "Sed lobortis mauris ac turpis egestas, ut consequat ligula hendrerit. " +
                     "Nullam tempus neque nec neque lacinia venenatis sit amet ornare dolor. " +
                     "Praesent suscipit convallis orci sit amet fermentum. Mauris porta enim vitae congue ultricies. " +
                     "Suspendisse elementum eleifend auctor. Sed commodo ante nec placerat aliquam.");
-            testIntent.putExtra(Constants.KEY_AGE, 25);
-            testIntent.putExtra(Constants.KEY_IMG, Uri.parse(("content://media/external/images/media/337663")));
+            testIntent.putExtra(MyConstants.KEY_AGE, 25);
+            testIntent.putExtra(MyConstants.KEY_IMG, Uri.parse(("content://media/external/images/media/337663")));
             return testIntent;
         }
     };

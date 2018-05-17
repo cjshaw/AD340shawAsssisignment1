@@ -121,7 +121,7 @@ public class MainActivityTest {
         onView(withId(R.id.submitBtn))
                 .perform(scrollTo(), click());
 
-        onView(withText(Constants.OCC_MSG))
+        onView(withText(MyConstants.OCC_MSG))
                 .check(matches(isDisplayed()))
                 .inRoot(isDialog())
                 .perform(click());
@@ -159,7 +159,7 @@ public class MainActivityTest {
         onView(withId(R.id.submitBtn))
                 .perform(scrollTo(), click());
 
-        onView(withText(Constants.IMG_MSG))
+        onView(withText(MyConstants.IMG_MSG))
                 .check(matches(isDisplayed()))
                 .inRoot(isDialog())
                 .perform(click());
@@ -228,7 +228,7 @@ public class MainActivityTest {
         onView(withId(R.id.submitBtn))
                 .perform(scrollTo(), click());
 
-        onView(withText(Constants.NAME_MSG))
+        onView(withText(MyConstants.NAME_MSG))
                 .check(matches(isDisplayed()))
                 .inRoot(isDialog())
                 .perform(click());
@@ -274,7 +274,7 @@ public class MainActivityTest {
         onView(withId(R.id.submitBtn))
                 .perform(scrollTo(), click());
 
-        onView(withText(Constants.EMAIL_MSG))
+        onView(withText(MyConstants.EMAIL_MSG))
                 .check(matches(isDisplayed()))
                 .inRoot(isDialog())
                 .perform(click());
@@ -320,7 +320,7 @@ public class MainActivityTest {
         onView(withId(R.id.submitBtn))
                 .perform(scrollTo(), click());
 
-        onView(withText(Constants.DOB_MSG))
+        onView(withText(MyConstants.DOB_MSG))
                 .check(matches(isDisplayed()))
                 .inRoot(isDialog())
                 .perform(click());
@@ -367,16 +367,16 @@ public class MainActivityTest {
 
 
         Intent intent = new Intent();
-        intent.putExtra(Constants.KEY_NAME, "Clint Shaw");
-        intent.putExtra(Constants.KEY_OCC, "occupation test");
-        intent.putExtra(Constants.KEY_AGE, 18);
-        intent.putExtra(Constants.KEY_DESC, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+        intent.putExtra(MyConstants.KEY_NAME, "Clint Shaw");
+        intent.putExtra(MyConstants.KEY_OCC, "occupation test");
+        intent.putExtra(MyConstants.KEY_AGE, 18);
+        intent.putExtra(MyConstants.KEY_DESC, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
                 "Vestibulum eleifend odio volutpat nibh ultricies mattis. " +
                 "Sed lobortis mauris ac turpis egestas, ut consequat ligula hendrerit. " +
                 "Nullam tempus neque nec neque lacinia venenatis sit amet ornare dolor. " +
                 "Praesent suscipit convallis orci sit amet fermentum. Mauris porta enim vitae congue ultricies. " +
                 "Suspendisse elementum eleifend auctor. Sed commodo ante nec placerat aliquam.");
-        intent.putExtra(Constants.KEY_IMG, Uri.parse(("content://media/external/images/media/337663")));
+        intent.putExtra(MyConstants.KEY_IMG, Uri.parse(("content://media/external/images/media/337663")));
 
 
         activityTestRule.launchActivity(intent);
@@ -421,7 +421,7 @@ public class MainActivityTest {
         onView(withId(R.id.submitBtn))
                 .perform(scrollTo(), click());
 
-        onView(withText(Constants.DOB_MSG))
+        onView(withText(MyConstants.DOB_MSG))
                 .check(matches(isDisplayed()))
                 .inRoot(isDialog())
                 .perform(click());
