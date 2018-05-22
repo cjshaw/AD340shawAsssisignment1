@@ -22,6 +22,7 @@ public class MyConstants {
     static final String AGE_MSG = "Your age is: ";
     static final String IMG_MSG = "Please select a photo";
     static final String MINMAX_MSG = "Please enter a proper range";
+    static final String PEDO_MSG = "Adults should date adults\nMinimum Age must be 18 or older";
 
     //db
     static final String DB_PRIMARYKEY = "clint_app";

@@ -115,39 +115,23 @@ public class SettingTabFragment extends Fragment implements AdapterView.OnItemSe
                     settings.setProfilePublic(false);
                 }
 
-                gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //TODO fix spinner nonsense
-                    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                        genderResult = gender.getSelectedItem().toString();
-                        settings.setGender(genderResult);
-                    }
+                genderResult = gender.getSelectedItem().toString();
+                settings.setGender(genderResult);
 
-                    public void onNothingSelected(AdapterView<?> parent) {
-                    }
-                });
+                maxDistResult = maxDistance.getSelectedItem().toString();
+                settings.setMaxDistance(maxDistResult);
 
-                maxDistance.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {//TODO fix spinner nonsense
-                    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                        maxDistResult = maxDistance.getSelectedItem().toString();
-                        settings.setMaxDistance(maxDistResult);
-                    }
-
-                    public void onNothingSelected(AdapterView<?> parent) {
-                    }
-                });
-
-                timeReminder.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {//TODO fix spinner nonsense
-                    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                        timeReminderResult = timeReminder.getSelectedItem().toString();
-                        settings.setMaxDistance(timeReminderResult);
-                    }
-
-                    public void onNothingSelected(AdapterView<?> parent) {
-                    }
-                });
+                timeReminderResult = timeReminder.getSelectedItem().toString();
+                settings.setMatchTimeReminder(timeReminderResult);
 
                 Log.v("settingsObject", settings.toString());
-
-                new SetSettingsTask(getActivity(), settings).execute();
+                if (settings.getMaxAge() <= settings.getMinAge()) {
+                    dialogueAlert(MyConstants.MINMAX_MSG);
+                } else if (settings.getMinAge() < 18) {
+                    dialogueAlert(MyConstants.PEDO_MSG);
+                } else {
+                    new SetSettingsTask(getActivity(), settings).execute();
+                }
             }
         });
 
@@ -263,7 +247,7 @@ public class SettingTabFragment extends Fragment implements AdapterView.OnItemSe
             String maxDistCompareVal = settings.getMaxDistance();
             if (maxDistCompareVal != null) {
                 int spinnerPosition = fragment.distanceAdapter.getPosition(maxDistCompareVal);
-                fragment.timeReminder.setSelection(spinnerPosition);
+                fragment.maxDistance.setSelection(spinnerPosition);
             }
 
             if (settings.isProfilePublic()) {
