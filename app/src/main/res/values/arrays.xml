@@ -1,40 +1,45 @@
 <resources>
-    <string-array name="matches_names">
-        <item>James Howlett</item>
-        <item>Jean Grey</item>
-        <item>Scott Summers</item>
-        <item>Jubilation Lee</item>
-        <item>Piotr Nikolaievitch</item>
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Trans Man</item>
+        <item>Trans Woman</item>
+        <item>Other</item>
     </string-array>
-    <string-array name="matches_desc">
-        <item>
-            He\'s the best and what he does. But what he does isn\'t very nice.
-        </item>
-        <item>
-            Jean Grey is a member of a subspecies of humans known as mutants, who are born with superhuman abilities. She was born with telepathic and telekinetic powers.
-        </item>
-        <item>
-            Cyclops is a member of a subspecies of humans known as mutants, who are born with superhuman abilities. Cyclops can emit powerful beams of energy from his eyes.
-        </item>
-        <item>
-            Jubilee is a member of the human subspecies known as mutants, born with superhuman abilities. She can generate pyrotechnic energy blasts from her hands.
-        </item>
-        <item>
-            A Russian mutant, he is a member of the X-Men. Colossus is able to transform himself into metallic form, making him the physically strongest of the team.
-        </item>
+
+    <string-array name="max_distance">
+        <item>5</item>
+        <item>15</item>
+        <item>25</item>
+        <item>50</item>
+        <item>100</item>
     </string-array>
-    <array name="matches_picture">
-        <item>@drawable/wolverine</item>
-        <item>@drawable/jeangrey</item>
-        <item>@drawable/cyclops</item>
-        <item>@drawable/jubilee</item>
-        <item>@drawable/colossus</item>
-    </array>
-    <array name="likes">
-        <item>false</item>
-        <item>false</item>
-        <item>false</item>
-        <item>false</item>
-        <item>false</item>
-    </array>
+
+    <string-array name="time_reminder">
+        <item>12:00AM - 1:00AM</item>
+        <item>1:00AM - 2:00AM</item>
+        <item>2:00AM - 3:00AM</item>
+        <item>3:00AM - 4:00AM</item>
+        <item>4:00AM - 5:00AM</item>
+        <item>5:00AM - 6:00AM</item>
+        <item>6:00AM - 7:00AM</item>
+        <item>7:00AM - 8:00AM</item>
+        <item>8:00AM - 9:00AM</item>
+        <item>9:00AM - 10:00AM</item>
+        <item>10:00AM - 11:00AM</item>
+        <item>11:00AM - 12:00PM</item>
+        <item>12:00PM - 1:00PM</item>
+        <item>1:00PM - 2:00PM</item>
+        <item>2:00PM - 3:00PM</item>
+        <item>3:00PM - 4:00PM</item>
+        <item>4:00PM - 5:00PM</item>
+        <item>5:00PM - 6:00PM</item>
+        <item>6:00PM - 7:00PM</item>
+        <item>7:00PM - 8:00PM</item>
+        <item>8:00PM - 9:00PM</item>
+        <item>9:00PM - 10:00PM</item>
+        <item>10:00PM - 11:00PM</item>
+        <item>11:00PM - 12:00AM</item>
+    </string-array>
+
 </resources>

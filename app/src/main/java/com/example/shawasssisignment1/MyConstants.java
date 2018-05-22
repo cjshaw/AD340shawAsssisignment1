@@ -21,6 +21,10 @@ public class MyConstants {
     static final String NAME_MSG = "Please enter a name!";
     static final String AGE_MSG = "Your age is: ";
     static final String IMG_MSG = "Please select a photo";
+    static final String MINMAX_MSG = "Please enter a proper range";
+
+    //db
+    static final String DB_PRIMARYKEY = "clint_app";
 
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.example.shawasssisignment1.model.Matches;
 import com.example.shawasssisignment1.viewmodels.MatchesViewModel;
@@ -14,6 +15,7 @@ public class SecondActivity extends AppCompatActivity implements MatchesTabFragm
 
     private static final String TAG = "SecondActivity";
 
+    private SettingTabFragment settingTabFragment;
     private SectionPageAdapter mSectionsPageAdapter;
     private ViewPager mViewPager;
     private MatchesViewModel viewModel;

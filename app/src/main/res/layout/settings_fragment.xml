@@ -1,16 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/settingsTab"
+    tools:context="com.example.shawasssisignment1.SettingTabFragment">
 
-    <TextView
-        android:id="@+id/settingsFrag"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/this_is_the_settings_tab"
-        android:textSize="25sp" />
+        android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/settingsFrag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="@string/this_is_the_settings_tab"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/timeReminderText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/matches_time_reminder"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/timeReminder"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="25dp" />
+
+        <TextView
+            android:id="@+id/maxDistanceText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/max_distance"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/maxDistance"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="25dp" />
+
+        <TextView
+            android:id="@+id/genderText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/gender"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/gender"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="25dp" />
+
+        <Switch
+            android:id="@+id/profilePrivacy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="25dp"
+            android:text="@string/set_profile_to_public" />
+
+        <TextView
+            android:id="@+id/minAgeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/minimum_age"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/minAge"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/minimum_age_of_matches"
+            android:inputType="number"
+            android:padding="25dp" />
+
+        <TextView
+            android:id="@+id/maxAgeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/maximum_age"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/maxAge"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/maximum_age_of_matches"
+            android:inputType="number"
+            android:padding="25dp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/applyBtn"
+            android:text="@string/apply_changes"
+            android:padding="25dp" />
+
+    </LinearLayout>
+</ScrollView>
