@@ -100,12 +100,16 @@ public class SettingTabFragment extends Fragment implements AdapterView.OnItemSe
                     String minAgeTemp = minAge.getText().toString(); //gets text from field
                     int finalMinAge = Integer.parseInt(minAgeTemp); //changes string number to int number
                     settings.setMinAge(finalMinAge);// sets value in setting entity
+                } else {
+                    dialogueAlert(MyConstants.MINMAX_MSG);
                 }
 
                 if (!maxAge.getText().toString().isEmpty()) {
                     String maxAgeTemp = maxAge.getText().toString();
                     int finalMaxAge = Integer.parseInt(maxAgeTemp);
                     settings.setMaxAge(finalMaxAge);
+                } else {
+                    dialogueAlert(MyConstants.MINMAX_MSG);
                 }
 
                 if (profilePrivacy.isChecked()) {
@@ -134,9 +138,6 @@ public class SettingTabFragment extends Fragment implements AdapterView.OnItemSe
                 }
             }
         });
-
-
-
 
         return view;
     }
@@ -184,7 +185,6 @@ public class SettingTabFragment extends Fragment implements AdapterView.OnItemSe
 
             return settings;
         }
-
     }
 
     private static class GetSettingsTask extends AsyncTask<Void, Void, Settings> {

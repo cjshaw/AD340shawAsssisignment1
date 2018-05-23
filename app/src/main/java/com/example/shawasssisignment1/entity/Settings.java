@@ -29,6 +29,20 @@ public class Settings {
     @ColumnInfo(name = "max_age")
     private int maxAge;
 
+    public Settings() {
+    }
+
+    public Settings(String appId, String matchTimeReminder, String maxDistance, String gender,
+                    boolean profilePublic, int minAge, int maxAge) {
+        this.appId = appId;
+        this.matchTimeReminder = matchTimeReminder;
+        this.maxDistance = maxDistance;
+        this.gender = gender;
+        this.profilePublic = profilePublic;
+        this.minAge = minAge;
+        this.maxAge = maxAge;
+    }
+
     @NonNull
     public String getAppId() {
         return appId;

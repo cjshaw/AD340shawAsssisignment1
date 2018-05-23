@@ -22,6 +22,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.example.shawasssisignment1.TestUtils.withRecyclerView;
 
 import com.example.shawasssisignment1.model.Matches;
+import com.example.shawasssisignment1.entity.Settings;
 
 import java.util.List;
 
@@ -126,7 +127,7 @@ public class SecondActivityTest {
 
         //Settings tab
         onView(withId(R.id.settingsFrag))
-                .check(matches(withText("This is the settings tab!")));
+                .check(matches(withText("Application Settings")));
     }
 
     @Test
@@ -245,6 +246,41 @@ public class SecondActivityTest {
         assertEquals(false, testMatches.isLiked());
         assertEquals("www.getpicture.com", testMatches.getImageUrl());
         assertEquals(0, testMatches.describeContents());
+    }
+
+    @Test
+    public void testSettingsEntity() {
+        Settings testSettings = new Settings("clint_app", "12:00AM - 1:00AM", "50",
+                "female", false, 18, 55);
+
+        assertEquals("clint_app", testSettings.getAppId());
+        assertEquals(false, testSettings.isProfilePublic());
+        assertEquals("12:00AM - 1:00AM", testSettings.getMatchTimeReminder());
+        assertEquals("50", testSettings.getMaxDistance());
+        assertEquals("female", testSettings.getGender());
+        assertEquals(18, testSettings.getMinAge());
+        assertEquals(55, testSettings.getMaxAge());
+    }
+
+    @Test
+    public void testEmptySettingsEntity() {
+        Settings testSettings = new Settings();
+
+        testSettings.setMatchTimeReminder("2:00AM - 3:00AM");
+        testSettings.setAppId("clint_app");
+        testSettings.setProfilePublic(true);
+        testSettings.setMinAge(25);
+        testSettings.setMaxAge(69);
+        testSettings.setMaxDistance("15");
+        testSettings.setGender("male");
+
+        assertEquals("clint_app", testSettings.getAppId());
+        assertEquals(true, testSettings.isProfilePublic());
+        assertEquals("2:00AM - 3:00AM", testSettings.getMatchTimeReminder());
+        assertEquals("15", testSettings.getMaxDistance());
+        assertEquals("male", testSettings.getGender());
+        assertEquals(25, testSettings.getMinAge());
+        assertEquals(69, testSettings.getMaxAge());
     }
 
     @Test
