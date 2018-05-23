@@ -6,27 +6,39 @@ import android.support.test.espresso.Espresso;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 
+import com.example.shawasssisignment1.entity.Settings;
+import com.example.shawasssisignment1.model.Matches;
+
+import org.hamcrest.core.AllOf;
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.util.List;
+
+import static android.support.test.espresso.Espresso.closeSoftKeyboard;
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
+import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
-import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
+import static android.support.test.espresso.matcher.RootMatchers.isDialog;
+import static android.support.test.espresso.matcher.RootMatchers.isPlatformPopup;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withHint;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.example.shawasssisignment1.TestUtils.withRecyclerView;
-
-import com.example.shawasssisignment1.model.Matches;
-import com.example.shawasssisignment1.entity.Settings;
-
-import java.util.List;
-
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.hasToString;
+import static org.hamcrest.core.AllOf.allOf;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.StringStartsWith.startsWith;
 import static org.junit.Assert.assertEquals;
 
 public class SecondActivityTest {
@@ -218,6 +230,129 @@ public class SecondActivityTest {
                 .atPositionOnView(5, R.id.card_title))
                 .check(matches(withText("Money man Ben")));
 
+    }
+
+    @Test
+    public void testBadAgeRange() {
+        onView(withId(R.id.viewpager))
+                .perform(swipeLeft());
+
+        onView(withId(R.id.viewpager))
+                .perform(swipeLeft());
+
+        onView(withId(R.id.settingsFrag)).check(matches(withText(containsString("Application Settings"))));
+
+        onView(withId(R.id.timeReminderText)).check(matches(withText(containsString("Matches Time Reminder"))));
+
+        onView(withId(R.id.maxDistanceText)).check(matches(withText(containsString("Max Distance in miles"))));
+
+        onView(withId(R.id.genderText)).check(matches(withText(containsString("Gender"))));
+
+        onView(withId(R.id.profilePrivacy)).check(matches(withText(containsString("Set profile to public:"))));
+
+        onView(withId(R.id.minAgeText)).check(matches(withText(containsString("Minimum Age"))));
+
+        onView(withId(R.id.maxAgeText)).check(matches(withText(containsString("Maximum Age"))));
+
+        //onView(withId(R.id.timeReminder)).perform(click());
+
+        //onView(withId(R.id.timeReminder)).check(matches(withSpinnerText(containsString("12:00AM - 1:00AM"))));
+
+//        onView(withId(R.id.maxDistance)).perform(click());
+//        onData(is(instanceOf(String.class))).atPosition(2).perform(click());
+//        onView(withId(R.id.maxDistance)).check(matches(withSpinnerText(containsString("25"))));
+//
+//        onView(withId(R.id.gender)).perform(click());
+//        onData(is(instanceOf(String.class))).atPosition(4).perform(click());
+//        onView(withId(R.id.gender)).check(matches(withSpinnerText(containsString("Other"))));
+
+        onView(withId(R.id.minAge))
+                .perform(typeText("44"));
+
+        onView(withId(R.id.maxAge))
+                .perform(scrollTo(), typeText("30"));
+
+        closeSoftKeyboard();
+
+        onView(withId(R.id.applyBtn))
+                .perform(scrollTo(), click());
+
+        onView(withText(MyConstants.MINMAX_MSG))
+                .check(matches(isDisplayed()))
+                .inRoot(isDialog())
+                .perform(click());
+    }
+
+    @Test
+    public void testTooYoung() {
+        onView(withId(R.id.viewpager))
+                .perform(swipeLeft());
+
+        onView(withId(R.id.viewpager))
+                .perform(swipeLeft());
+
+//        onView(withId(R.id.timeReminder)).perform(click());
+//        onData(hasToString(startsWith("4:00AM"))).perform(click());
+//        onView(withId(R.id.timeReminder)).check(matches(withSpinnerText(containsString("4:00AM - 5:00AM"))));
+//
+//        onView(withId(R.id.maxDistance)).perform(click());
+//        onData(hasToString(startsWith("25"))).perform(click());
+//        onView(withId(R.id.maxDistance)).check(matches(withSpinnerText(containsString("25"))));
+//
+//        onView(withId(R.id.gender)).perform(click());
+//        onData(hasToString(startsWith("Other"))).perform(click());
+//        onView(withId(R.id.gender)).check(matches(withSpinnerText(containsString("Other"))));
+
+        closeSoftKeyboard();
+
+        onView(withId(R.id.minAge))
+                .perform(typeText("11"));
+
+        onView(withId(R.id.maxAge))
+                .perform(scrollTo(), typeText("55"));
+
+        onView(withId(R.id.applyBtn))
+                .perform(scrollTo(), click());
+
+        onView(withText(MyConstants.PEDO_MSG))
+                .check(matches(isDisplayed()))
+                .inRoot(isDialog())
+                .perform(click());
+    }
+
+
+    @Test
+    public void testDBApply() {
+        onView(withId(R.id.viewpager))
+                .perform(swipeLeft());
+
+        onView(withId(R.id.viewpager))
+                .perform(swipeLeft());
+
+//        onView(withId(R.id.timeReminder)).perform(click());
+//        onData(hasToString(startsWith("4:00AM"))).perform(click());
+//        onView(withId(R.id.timeReminder)).check(matches(withSpinnerText(containsString("4:00AM - 5:00AM"))));
+//
+//        onView(withId(R.id.maxDistance)).perform(click());
+//        onData(hasToString(startsWith("25"))).perform(click());
+//        onView(withId(R.id.maxDistance)).check(matches(withSpinnerText(containsString("25"))));
+//
+//        onView(withId(R.id.gender)).perform(click());
+//        onData(hasToString(startsWith("Other"))).perform(click());
+//        onView(withId(R.id.gender)).check(matches(withSpinnerText(containsString("Other"))));
+
+        closeSoftKeyboard();
+
+        onView(withId(R.id.minAge))
+                .perform(typeText("22"));
+
+        onView(withId(R.id.maxAge))
+                .perform(scrollTo(), typeText("55"));
+
+        closeSoftKeyboard();
+
+        onView(withId(R.id.applyBtn))
+                .perform(scrollTo(), click());
     }
 
     @Test
