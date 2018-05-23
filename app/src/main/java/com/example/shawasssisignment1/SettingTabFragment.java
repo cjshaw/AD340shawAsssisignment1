@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.shawasssisignment1.entity.Settings;
 
@@ -53,6 +54,7 @@ public class SettingTabFragment extends Fragment implements AdapterView.OnItemSe
     ArrayAdapter<CharSequence> distanceAdapter;
     ArrayAdapter<CharSequence> genderAdapter;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -71,8 +73,9 @@ public class SettingTabFragment extends Fragment implements AdapterView.OnItemSe
         maxAgeText = view.findViewById(R.id.maxAgeText);
         maxAge = view.findViewById(R.id.maxAge);
         apply = view.findViewById(R.id.applyBtn);
-
-        new GetSettingsTask(getActivity(), this, MyConstants.DB_PRIMARYKEY).execute();
+        if (savedInstanceState == null) {
+            new GetSettingsTask(getActivity(), this, MyConstants.DB_PRIMARYKEY).execute();
+        }
 
         genderAdapter = ArrayAdapter.createFromResource(Objects.requireNonNull(getContext()),
                 R.array.gender, android.R.layout.simple_spinner_dropdown_item);
@@ -90,6 +93,13 @@ public class SettingTabFragment extends Fragment implements AdapterView.OnItemSe
                 R.array.time_reminder, android.R.layout.simple_spinner_dropdown_item);
         timeReminderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         timeReminder.setAdapter(timeReminderAdapter);
+
+        if (savedInstanceState != null) {
+            Log.v("myOnCreate", savedInstanceState.toString());
+            timeReminder.setSelection(savedInstanceState.getInt("timeReminder"));
+            gender.setSelection(savedInstanceState.getInt("gender"));
+            maxDistance.setSelection(savedInstanceState.getInt("maxDistance"));
+        }
 
         apply.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
@@ -135,6 +145,7 @@ public class SettingTabFragment extends Fragment implements AdapterView.OnItemSe
                     dialogueAlert(MyConstants.PEDO_MSG);
                 } else {
                     new SetSettingsTask(getActivity(), settings).execute();
+                    Toast.makeText(view.getContext(), "Your settings have been saved", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -161,6 +172,16 @@ public class SettingTabFragment extends Fragment implements AdapterView.OnItemSe
             }
         });
         builder1.show();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("timeReminder", timeReminder.getSelectedItemPosition());
+        outState.putInt("gender", gender.getSelectedItemPosition());
+        outState.putInt("maxDistance", maxDistance.getSelectedItemPosition());
+
+        Log.v("myBundle", outState.toString());
     }
 
     private static class SetSettingsTask extends AsyncTask<Void, Void, Settings> {
