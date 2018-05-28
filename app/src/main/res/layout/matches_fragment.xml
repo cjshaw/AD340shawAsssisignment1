@@ -12,8 +12,10 @@
     android:foreground="?android:attr/selectableItemBackground">
 
     <RelativeLayout
+        android:id="@+id/this_card"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="visible">
 
         <ImageView
             android:id="@+id/card_image"
@@ -33,7 +35,7 @@
             android:textColor="#ce0000" />
 
         <TextView
-            android:id="@+id/card_text"
+            android:id="@+id/location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/card_image"
@@ -51,7 +53,7 @@
             android:layout_height="48dp"
             android:layout_marginEnd="@dimen/md_keylines"
             app:srcCompat="@drawable/ic_heart"
-            android:layout_below="@+id/card_text"
+            android:layout_below="@+id/location"
             android:layout_alignParentEnd="true"
             android:clickable="true"
             style="?android:attr/borderlessButtonStyle"

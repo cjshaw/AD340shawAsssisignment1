@@ -2,11 +2,14 @@ package com.example.shawasssisignment1;
 
 
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.shawasssisignment1.model.Matches;
 import com.example.shawasssisignment1.viewmodels.MatchesViewModel;
@@ -76,4 +79,5 @@ public class SecondActivity extends AppCompatActivity implements MatchesTabFragm
         viewModel.clear();
         super.onPause();
     }
+
 }

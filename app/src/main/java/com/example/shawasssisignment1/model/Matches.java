@@ -15,15 +15,19 @@ public class Matches implements Parcelable {
     public String name;
     public String imageUrl;
     public boolean liked;
+    public String lat;
+    public String longitude;
 
     public Matches() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public Matches(String name, boolean liked, String imageUrl) {
+    public Matches(String name, boolean liked, String imageUrl, String latitude, String longitude) {
         this.name = name;
         this.liked = liked;
         this.imageUrl = imageUrl;
+        this.lat = latitude;
+        this.longitude = longitude;
     }
 
     public Matches(Parcel in) {
@@ -38,6 +42,14 @@ public class Matches implements Parcelable {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public String getLatitude() {
+        return lat;
+    }
+
+    public String getLongitude() {
+        return longitude;
     }
 
     public boolean isLiked() {
@@ -63,6 +75,8 @@ public class Matches implements Parcelable {
         result.put("imageUrl", imageUrl);
         result.put("liked", liked);
         result.put("name", name);
+        result.put("lat", lat);
+        result.put("long", longitude);
 
         return result;
     }
@@ -77,5 +91,7 @@ public class Matches implements Parcelable {
         dest.writeString(imageUrl);
         dest.writeString(name);
         dest.writeByte((byte) (liked ? 1 : 0));
+        dest.writeString(longitude);
+        dest.writeString(lat);
     }
 }

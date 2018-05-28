@@ -26,5 +26,8 @@
     <string name="maximum_age_of_matches">Maximum age of matches</string>
     <string name="minimum_age_of_matches">Minimum age of matches</string>
     <string name="apply_changes">Apply Changes</string>
-
+    <string name="enable_location">Enable Location</string>
+    <string name="location_message">Your Locations Settings is set to \'Off\'. Please Enable Location to use this app</string>
+    <string name="location_settings">Location Settings</string>
+    <string name="location_cancel">Cancel</string>
 </resources>

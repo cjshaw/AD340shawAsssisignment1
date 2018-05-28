@@ -1,14 +1,17 @@
 package com.example.shawasssisignment1;
 
 import android.graphics.Color;
+import android.location.Location;
 import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,10 +25,15 @@ import java.util.List;
 public class MatchesRecyclerViewAdapter extends RecyclerView.Adapter<MatchesRecyclerViewAdapter.ViewHolder> {
     private final List<Matches> mValues;
     private final MatchesTabFragment.OnListFragmentInteractionListener mListener;
+    private double currLat;
+    private double currLong;
 
-    public MatchesRecyclerViewAdapter(List<Matches> items, MatchesTabFragment.OnListFragmentInteractionListener listener) {
+
+    public MatchesRecyclerViewAdapter(List<Matches> items, MatchesTabFragment.OnListFragmentInteractionListener listener, double currLong, double currLat) {
         mValues = items;
         mListener = listener;
+        this.currLong = currLong;
+        this.currLat = currLat;
     }
 
     @NonNull
@@ -63,6 +71,24 @@ public class MatchesRecyclerViewAdapter extends RecyclerView.Adapter<MatchesRecy
                 mListener.onListFragmentInteraction(holder.mItem);
             }
         });
+
+
+        holder.latitude = mValues.get(position).lat;
+        double newLat = Double.parseDouble(holder.latitude);
+
+        holder.longitude = mValues.get(position).longitude;
+        double newLong = Double.parseDouble(holder.longitude);
+
+        float[] distance = new float[1];
+
+        Location.distanceBetween(currLat, currLong, newLat, newLong, distance);
+
+        Log.v("help", Double.toString(distance[0]));
+
+        if (distance[0] > 16000) {
+            holder.mCard.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
@@ -74,18 +100,30 @@ public class MatchesRecyclerViewAdapter extends RecyclerView.Adapter<MatchesRecy
         }
     }
 
+    public void setCurrLat(double currLat) {
+        this.currLat = currLat;
+    }
+
+    public void setCurrLong(double currLong) {
+        this.currLong = currLong;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         View mView;
         public final TextView mName;
         public final ImageView mImage;
         public final ImageButton likeBtn;
+        public final RelativeLayout mCard;
         public String mImgUrl;
         public Matches mItem;
         public Boolean liked;
+        public String latitude;
+        public String longitude;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
+            mCard = view.findViewById(R.id.this_card);
             mName = view.findViewById(R.id.card_title);
             mImage = view.findViewById(R.id.card_image);
             likeBtn = view.findViewById(R.id.like_button);
