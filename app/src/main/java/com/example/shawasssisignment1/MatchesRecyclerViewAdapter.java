@@ -85,7 +85,7 @@ public class MatchesRecyclerViewAdapter extends RecyclerView.Adapter<MatchesRecy
 
         Log.v("help", Double.toString(distance[0]));
 
-        if (distance[0] > 16000) {
+        if (distance[0] > 16094) {
             holder.mCard.setVisibility(View.GONE);
         }
 

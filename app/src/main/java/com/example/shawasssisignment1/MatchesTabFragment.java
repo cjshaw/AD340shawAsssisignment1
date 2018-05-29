@@ -71,7 +71,7 @@ public class MatchesTabFragment extends Fragment {
 
     private boolean checkLocation() {
         if (!isLocationEnabled()) {
-            //showAlert();
+            showAlert();
         }
         return isLocationEnabled();
     }
@@ -105,19 +105,11 @@ public class MatchesTabFragment extends Fragment {
         }
     }
 
-    public double getCurrLat() {
-        return this.latitudeNetwork;
-    }
-
 
     private final LocationListener locationListenerNetwork = new LocationListener() {
         public void onLocationChanged(Location location) {
             longitudeNetwork = location.getLongitude();
             latitudeNetwork = location.getLatitude();
-
-
-            Log.v("Mylat", Double.toString(latitudeNetwork));
-            Log.v("Mylong", Double.toString(longitudeNetwork));
         }
 
         @Override
