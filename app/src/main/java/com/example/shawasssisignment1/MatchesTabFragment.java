@@ -73,7 +73,7 @@ public class MatchesTabFragment extends Fragment {
 
     private boolean checkLocation() {
         if (!isLocationEnabled()) {
-            showAlert();
+            //showAlert();
         }
         return isLocationEnabled();
     }
@@ -82,18 +82,18 @@ public class MatchesTabFragment extends Fragment {
         return locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
 
-    private void showAlert() {
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-        dialog.setTitle(R.string.enable_location)
-                .setMessage(getString(R.string.location_message))
-                .setPositiveButton(R.string.location_settings, (paramDialogInterface, paramInt) -> {
-                    Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    startActivity(myIntent);
-                })
-                .setNegativeButton(R.string.location_cancel, (paramDialogInterface, paramInt) -> {
-                });
-        dialog.show();
-    }
+//    private void showAlert() {
+//        final AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+//        dialog.setTitle(R.string.enable_location)
+//                .setMessage(getString(R.string.location_message))
+//                .setPositiveButton(R.string.location_settings, (paramDialogInterface, paramInt) -> {
+//                    Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+//                    startActivity(myIntent);
+//                })
+//                .setNegativeButton(R.string.location_cancel, (paramDialogInterface, paramInt) -> {
+//                });
+//        dialog.show();
+//    }
 
     public void toggleNetworkUpdates(View view) {
         if (!checkLocation()) {
