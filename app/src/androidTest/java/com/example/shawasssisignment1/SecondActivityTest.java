@@ -1,24 +1,37 @@
 package com.example.shawasssisignment1;
 
+import android.arch.persistence.room.Room;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
+import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
+import android.support.test.rule.GrantPermissionRule;
+import android.test.RenamingDelegatingContext;
 
+import com.example.shawasssisignment1.dao.SettingsDao;
 import com.example.shawasssisignment1.entity.Settings;
 import com.example.shawasssisignment1.model.Matches;
 
 import org.hamcrest.core.AllOf;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.List;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
+import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static android.support.test.espresso.Espresso.closeSoftKeyboard;
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.action.ViewActions.typeText;
@@ -32,6 +45,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.example.shawasssisignment1.TestUtils.withRecyclerView;
+import static java.security.AccessController.getContext;
+import static org.hamcrest.CoreMatchers.any;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.Matchers.anything;
@@ -40,6 +55,7 @@ import static org.hamcrest.core.AllOf.allOf;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.StringStartsWith.startsWith;
 import static org.junit.Assert.assertEquals;
+
 
 public class SecondActivityTest {
 
@@ -63,8 +79,12 @@ public class SecondActivityTest {
         }
     };
 
+    @Rule
+    public GrantPermissionRule permissionRule = GrantPermissionRule.grant(android.Manifest.permission.ACCESS_FINE_LOCATION);
+
     @Test
-    public void setsRightMessageBasedOnIntentExtra() {
+    public void setsRightMessageBasedOnIntentExtra() throws InterruptedException {
+        Thread.sleep(6000);
         onView(withId(R.id.userAgeName))
                 .check(matches(withText("25,\t\tClint Shaw")));
 
@@ -143,13 +163,12 @@ public class SecondActivityTest {
     }
 
     @Test
-    public void testLikeBtn() {
-        SecondActivity activity = activityTestRule.getActivity();
+    public void testLikeBtn() throws InterruptedException {
 
         //swipe to matches tab
         onView(withId(R.id.viewpager))
                 .perform(swipeLeft());
-
+        Thread.sleep(6000);
         //click like button
         onView(withId(R.id.my_recycler_view)).perform(
                 RecyclerViewActions.actionOnItemAtPosition(0, TestUtils.clickChildViewWithId(R.id.like_button)));
@@ -158,26 +177,26 @@ public class SecondActivityTest {
 //                inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
 //                check(matches(isDisplayed()));
 
-        onView(withId(R.id.my_recycler_view)).perform(
-                RecyclerViewActions.actionOnItemAtPosition(1, TestUtils.clickChildViewWithId(R.id.like_button)));
-//        onView(withText("You liked Mark the King")).
-//                inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
-//                check(matches(isDisplayed()));
-
-        onView(withId(R.id.my_recycler_view)).perform(
-                RecyclerViewActions.actionOnItemAtPosition(2, TestUtils.clickChildViewWithId(R.id.like_button)));
-//        onView(withText("You liked Overachiever Alex")).
-//                inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
-//                check(matches(isDisplayed()));
-
-        onView(withId(R.id.my_recycler_view)).perform(
-                RecyclerViewActions.actionOnItemAtPosition(3, TestUtils.clickChildViewWithId(R.id.like_button)));
-//        onView(withText("You liked Iceman Judah")).
-//                inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
-//                check(matches(isDisplayed()));
-
-        onView(withId(R.id.my_recycler_view)).perform(
-                RecyclerViewActions.actionOnItemAtPosition(4, TestUtils.clickChildViewWithId(R.id.like_button)));
+//        onView(withId(R.id.my_recycler_view)).perform(
+//                RecyclerViewActions.actionOnItemAtPosition(1, TestUtils.clickChildViewWithId(R.id.like_button)));
+////        onView(withText("You liked Mark the King")).
+////                inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
+////                check(matches(isDisplayed()));
+//
+//        onView(withId(R.id.my_recycler_view)).perform(
+//                RecyclerViewActions.actionOnItemAtPosition(2, TestUtils.clickChildViewWithId(R.id.like_button)));
+////        onView(withText("You liked Overachiever Alex")).
+////                inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
+////                check(matches(isDisplayed()));
+//
+//        onView(withId(R.id.my_recycler_view)).perform(
+//                RecyclerViewActions.actionOnItemAtPosition(3, TestUtils.clickChildViewWithId(R.id.like_button)));
+////        onView(withText("You liked Iceman Judah")).
+////                inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
+////                check(matches(isDisplayed()));
+//
+//        onView(withId(R.id.my_recycler_view)).perform(
+//                RecyclerViewActions.actionOnItemAtPosition(4, TestUtils.clickChildViewWithId(R.id.like_button)));
 //        onView(withText("You liked Hayden the Wrestler")).
 //                inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
 //                check(matches(isDisplayed()));
@@ -190,39 +209,43 @@ public class SecondActivityTest {
     }
 
     @Test
-    public void testNameOnCard() {
+    public void testNameOnCard() throws InterruptedException {
 
         //swipe to matches tab
-        onView(withId(R.id.viewpager))
-                .perform(swipeLeft());
-
+        onView(withText(R.string.matches))
+                .perform(click());
+        Thread.sleep(6000);
         onView(withRecyclerView(R.id.my_recycler_view)
                 .atPositionOnView(0, R.id.card_title))
                 .check(matches(withText("Cool Guy Mike")));
 
-        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(1));
-
         onView(withRecyclerView(R.id.my_recycler_view)
-                .atPositionOnView(1, R.id.card_title))
-                .check(matches(withText("Mark the King")));
+                .atPositionOnView(0, R.id.card_image))
+                .check(matches(isDisplayed()));
 
-        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(2));
-
-        onView(withRecyclerView(R.id.my_recycler_view)
-                .atPositionOnView(2, R.id.card_title))
-                .check(matches(withText("Overachiever Alex")));
-
-        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(3));
-
-        onView(withRecyclerView(R.id.my_recycler_view)
-                .atPositionOnView(3, R.id.card_title))
-                .check(matches(withText("Iceman Judah")));
-
-        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(4));
-
-        onView(withRecyclerView(R.id.my_recycler_view)
-                .atPositionOnView(4, R.id.card_title))
-                .check(matches(withText("Hayden the Wrestler")));
+//        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(1));
+//
+//        onView(withRecyclerView(R.id.my_recycler_view)
+//                .atPositionOnView(1, R.id.card_title))
+//                .check(matches(withText("Mark the King")));
+//
+//        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(2));
+//
+//        onView(withRecyclerView(R.id.my_recycler_view)
+//                .atPositionOnView(2, R.id.card_title))
+//                .check(matches(withText("Overachiever Alex")));
+//
+//        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(3));
+//
+//        onView(withRecyclerView(R.id.my_recycler_view)
+//                .atPositionOnView(3, R.id.card_title))
+//                .check(matches(withText("Iceman Judah")));
+//
+//        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(4));
+//
+//        onView(withRecyclerView(R.id.my_recycler_view)
+//                .atPositionOnView(4, R.id.card_title))
+//                .check(matches(withText("Hayden the Wrestler")));
 //
 //        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(5));
 //
@@ -234,11 +257,8 @@ public class SecondActivityTest {
 
     @Test
     public void testBadAgeRange() {
-        onView(withId(R.id.viewpager))
-                .perform(swipeLeft());
-
-        onView(withId(R.id.viewpager))
-                .perform(swipeLeft());
+        onView(withText(R.string.settings))
+                .perform(click());
 
         onView(withId(R.id.settingsFrag)).check(matches(withText(containsString("Application Settings"))));
 
@@ -254,25 +274,15 @@ public class SecondActivityTest {
 
         onView(withId(R.id.maxAgeText)).check(matches(withText(containsString("Maximum Age"))));
 
-        //onView(withId(R.id.timeReminder)).perform(click());
-
-        //onView(withId(R.id.timeReminder)).check(matches(withSpinnerText(containsString("12:00AM - 1:00AM"))));
-
-//        onView(withId(R.id.maxDistance)).perform(click());
-//        onData(is(instanceOf(String.class))).atPosition(2).perform(click());
-//        onView(withId(R.id.maxDistance)).check(matches(withSpinnerText(containsString("25"))));
-//
-//        onView(withId(R.id.gender)).perform(click());
-//        onData(is(instanceOf(String.class))).atPosition(4).perform(click());
-//        onView(withId(R.id.gender)).check(matches(withSpinnerText(containsString("Other"))));
-
         onView(withId(R.id.minAge))
-                .perform(typeText("44"));
+                .perform(scrollTo(), replaceText(""))
+                .perform(typeText("44"))
+                .perform(ViewActions.closeSoftKeyboard());
 
         onView(withId(R.id.maxAge))
-                .perform(scrollTo(), typeText("30"));
-
-        closeSoftKeyboard();
+                .perform(scrollTo(), replaceText(""))
+                .perform(typeText("30"))
+                .perform(ViewActions.closeSoftKeyboard());
 
         onView(withId(R.id.applyBtn))
                 .perform(scrollTo(), click());
@@ -285,31 +295,33 @@ public class SecondActivityTest {
 
     @Test
     public void testTooYoung() {
-        onView(withId(R.id.viewpager))
-                .perform(swipeLeft());
+        onView(withText(R.string.settings))
+                .perform(click());
 
-        onView(withId(R.id.viewpager))
-                .perform(swipeLeft());
+        onView(withId(R.id.timeReminder)).perform(click());
+        onData(anything()).atPosition(1).perform(click());
+        onView(withId(R.id.timeReminder)).check(matches(withSpinnerText(containsString("1:00AM"))));
 
-//        onView(withId(R.id.timeReminder)).perform(click());
-//        onData(hasToString(startsWith("4:00AM"))).perform(click());
-//        onView(withId(R.id.timeReminder)).check(matches(withSpinnerText(containsString("4:00AM - 5:00AM"))));
-//
-//        onView(withId(R.id.maxDistance)).perform(click());
-//        onData(hasToString(startsWith("25"))).perform(click());
-//        onView(withId(R.id.maxDistance)).check(matches(withSpinnerText(containsString("25"))));
-//
-//        onView(withId(R.id.gender)).perform(click());
-//        onData(hasToString(startsWith("Other"))).perform(click());
-//        onView(withId(R.id.gender)).check(matches(withSpinnerText(containsString("Other"))));
+        onView(withId(R.id.maxDistance)).perform(click());
+        onData(anything()).atPosition(1).perform(click());
+        onView(withId(R.id.maxDistance)).check(matches(withSpinnerText(containsString("15"))));
+
+        onView(withId(R.id.gender)).perform(click());
+        onData(anything()).atPosition(1).perform(click());
+        onView(withId(R.id.gender)).check(matches(withSpinnerText(containsString("Female"))));
 
         closeSoftKeyboard();
 
         onView(withId(R.id.minAge))
-                .perform(typeText("11"));
+                .perform(scrollTo(), replaceText(""))
+                .perform(typeText("11"))
+                .perform(ViewActions.closeSoftKeyboard());
+
 
         onView(withId(R.id.maxAge))
-                .perform(scrollTo(), typeText("55"));
+                .perform(scrollTo(), replaceText(""))
+                .perform(typeText("55"))
+                .perform(ViewActions.closeSoftKeyboard());
 
         onView(withId(R.id.applyBtn))
                 .perform(scrollTo(), click());
@@ -323,33 +335,21 @@ public class SecondActivityTest {
 
     @Test
     public void testDBApply() {
-        onView(withId(R.id.viewpager))
-                .perform(swipeLeft());
-
-        onView(withId(R.id.viewpager))
-                .perform(swipeLeft());
-
-//        onView(withId(R.id.timeReminder)).perform(click());
-//        onData(hasToString(startsWith("4:00AM"))).perform(click());
-//        onView(withId(R.id.timeReminder)).check(matches(withSpinnerText(containsString("4:00AM - 5:00AM"))));
-//
-//        onView(withId(R.id.maxDistance)).perform(click());
-//        onData(hasToString(startsWith("25"))).perform(click());
-//        onView(withId(R.id.maxDistance)).check(matches(withSpinnerText(containsString("25"))));
-//
-//        onView(withId(R.id.gender)).perform(click());
-//        onData(hasToString(startsWith("Other"))).perform(click());
-//        onView(withId(R.id.gender)).check(matches(withSpinnerText(containsString("Other"))));
+        onView(withText(R.string.settings))
+                .perform(click());
 
         closeSoftKeyboard();
 
         onView(withId(R.id.minAge))
-                .perform(typeText("22"));
+                .perform(scrollTo(), replaceText(""))
+                .perform(typeText("22"))
+                .perform(ViewActions.closeSoftKeyboard());
 
         onView(withId(R.id.maxAge))
-                .perform(scrollTo(), typeText("55"));
+                .perform(scrollTo(), replaceText(""))
+                .perform(typeText("55"))
+                .perform(ViewActions.closeSoftKeyboard());
 
-        closeSoftKeyboard();
 
         onView(withId(R.id.applyBtn))
                 .perform(scrollTo(), click());
@@ -427,49 +427,6 @@ public class SecondActivityTest {
         MatchesRecyclerViewAdapter testAdapter = new MatchesRecyclerViewAdapter(testList, testListener, 0.0, 0.0);
 
         assertEquals(0, testAdapter.getItemCount());
-    }
-
-    @Test
-    public void testCardImage() {
-
-        //swipe to matches tab
-        onView(withId(R.id.viewpager))
-                .perform(swipeLeft());
-
-        onView(withRecyclerView(R.id.my_recycler_view)
-                .atPositionOnView(0, R.id.card_image))
-                .check(matches(isDisplayed()));
-
-        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(1));
-
-        onView(withRecyclerView(R.id.my_recycler_view)
-                .atPositionOnView(1, R.id.card_image))
-                .check(matches(isDisplayed()));
-
-        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(2));
-
-        onView(withRecyclerView(R.id.my_recycler_view)
-                .atPositionOnView(2, R.id.card_image))
-                .check(matches(isDisplayed()));
-
-        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(3));
-
-        onView(withRecyclerView(R.id.my_recycler_view)
-                .atPositionOnView(3, R.id.card_image))
-                .check(matches(isDisplayed()));
-
-        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(4));
-
-        onView(withRecyclerView(R.id.my_recycler_view)
-                .atPositionOnView(4, R.id.card_image))
-                .check(matches(isDisplayed()));
-
-//        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(5));
-//
-//        onView(withRecyclerView(R.id.my_recycler_view)
-//                .atPositionOnView(5, R.id.card_image))
-//                .check(matches(isDisplayed()));
-
     }
 
 }

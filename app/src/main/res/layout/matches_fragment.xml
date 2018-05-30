@@ -15,6 +15,7 @@
         android:id="@+id/this_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:visibility="visible">
 
         <ImageView
@@ -30,7 +31,7 @@
             android:layout_height="@dimen/card_title_height"
             android:layout_alignBottom="@+id/card_image"
             android:layout_marginStart="@dimen/md_keylines"
-            android:text="[NAME GOES HERE]"
+            android:text="@string/name_goes_here"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="#ce0000" />
 

@@ -49,6 +49,8 @@ public class MatchesTabFragment extends Fragment {
 
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
+        checkLocation();
+
         if (checkLocation()) {
             toggleNetworkUpdates(view);
         }
