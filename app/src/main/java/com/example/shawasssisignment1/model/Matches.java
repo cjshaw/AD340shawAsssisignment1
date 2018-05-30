@@ -30,12 +30,6 @@ public class Matches implements Parcelable {
         this.longitude = longitude;
     }
 
-    public Matches(Parcel in) {
-        name = in.readString();
-        imageUrl = in.readString();
-        liked = in.readByte() != 0;
-    }
-
     public String getName() {
         return name;
     }
@@ -59,7 +53,7 @@ public class Matches implements Parcelable {
     public static final Creator<Matches> CREATOR = new Creator<Matches>() {
         @Override
         public Matches createFromParcel(Parcel in) {
-            return new Matches(in);
+            return new Matches();
         }
 
         @Override
@@ -67,19 +61,6 @@ public class Matches implements Parcelable {
             return new Matches[size];
         }
     };
-
-    @Exclude
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("uid", uid);
-        result.put("imageUrl", imageUrl);
-        result.put("liked", liked);
-        result.put("name", name);
-        result.put("lat", lat);
-        result.put("long", longitude);
-
-        return result;
-    }
 
     @Override
     public int describeContents() {
