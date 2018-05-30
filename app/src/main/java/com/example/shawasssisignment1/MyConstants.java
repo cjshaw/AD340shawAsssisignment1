@@ -3,6 +3,11 @@ package com.example.shawasssisignment1;
 import java.util.regex.Pattern;
 
 public class MyConstants {
+
+    public MyConstants() {
+
+    }
+
     static final int MIN_AGE = 18;
 
     //Keys for bundled extras

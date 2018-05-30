@@ -260,7 +260,7 @@ public class MainActivityTest {
         onView(withId(R.id.birthdayEdit))
                 .perform(click());
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName())))
-                .perform(PickerActions.setDate(2000, 1, 1));
+                .perform(PickerActions.setDate(2000, 1, Calendar.DAY_OF_MONTH));
         onView(withId(android.R.id.button1)).perform(click());
 
         Intent resultData = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
