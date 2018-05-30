@@ -1,32 +1,24 @@
 package com.example.shawasssisignment1;
 
-import android.arch.persistence.room.Room;
-import android.content.Context;
+import android.Manifest;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.rule.GrantPermissionRule;
-import android.test.RenamingDelegatingContext;
 
-import com.example.shawasssisignment1.dao.SettingsDao;
 import com.example.shawasssisignment1.entity.Settings;
 import com.example.shawasssisignment1.model.Matches;
 
-import org.hamcrest.core.AllOf;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.List;
 
-import static android.support.test.InstrumentationRegistry.getInstrumentation;
-import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static android.support.test.espresso.Espresso.closeSoftKeyboard;
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
@@ -36,24 +28,15 @@ import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
 import static android.support.test.espresso.matcher.RootMatchers.isDialog;
-import static android.support.test.espresso.matcher.RootMatchers.isPlatformPopup;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withHint;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.example.shawasssisignment1.TestUtils.withRecyclerView;
-import static java.security.AccessController.getContext;
-import static org.hamcrest.CoreMatchers.any;
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.Matchers.anything;
-import static org.hamcrest.Matchers.hasToString;
-import static org.hamcrest.core.AllOf.allOf;
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.StringStartsWith.startsWith;
 import static org.junit.Assert.assertEquals;
 
 
@@ -80,11 +63,15 @@ public class SecondActivityTest {
     };
 
     @Rule
-    public GrantPermissionRule permissionRule = GrantPermissionRule.grant(android.Manifest.permission.ACCESS_FINE_LOCATION);
+    public GrantPermissionRule permissionRule1 = GrantPermissionRule.grant(android.Manifest.permission.ACCESS_FINE_LOCATION);
+    @Rule
+    public GrantPermissionRule permissionRule2 = GrantPermissionRule.grant(Manifest.permission.ACCESS_COARSE_LOCATION);
+
+
 
     @Test
-    public void setsRightMessageBasedOnIntentExtra() throws InterruptedException {
-        Thread.sleep(6000);
+    public void setsRightMessageBasedOnIntentExtra() {
+
         onView(withId(R.id.userAgeName))
                 .check(matches(withText("25,\t\tClint Shaw")));
 
@@ -166,8 +153,9 @@ public class SecondActivityTest {
     public void testLikeBtn() throws InterruptedException {
 
         //swipe to matches tab
-        onView(withId(R.id.viewpager))
-                .perform(swipeLeft());
+        onView(withText("Matches"))
+                .perform(click());
+
         Thread.sleep(6000);
         //click like button
         onView(withId(R.id.my_recycler_view)).perform(
@@ -211,17 +199,23 @@ public class SecondActivityTest {
     @Test
     public void testNameOnCard() throws InterruptedException {
 
+        Location fakeLocation = new Location(LocationManager.NETWORK_PROVIDER);
+        fakeLocation.setLongitude(122.3321);
+        fakeLocation.setLatitude(47.6062);
+
         //swipe to matches tab
-        onView(withText(R.string.matches))
+        onView(withText("Matches"))
                 .perform(click());
+
         Thread.sleep(6000);
+
         onView(withRecyclerView(R.id.my_recycler_view)
                 .atPositionOnView(0, R.id.card_title))
                 .check(matches(withText("Cool Guy Mike")));
 
-        onView(withRecyclerView(R.id.my_recycler_view)
-                .atPositionOnView(0, R.id.card_image))
-                .check(matches(isDisplayed()));
+//        onView(withRecyclerView(R.id.my_recycler_view)
+//                .atPositionOnView(0, R.id.card_image))
+//                .check(matches(isDisplayed()));
 
 //        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(1));
 //
@@ -257,7 +251,7 @@ public class SecondActivityTest {
 
     @Test
     public void testBadAgeRange() {
-        onView(withText(R.string.settings))
+        onView(withText("Settings"))
                 .perform(click());
 
         onView(withId(R.id.settingsFrag)).check(matches(withText(containsString("Application Settings"))));
@@ -295,7 +289,7 @@ public class SecondActivityTest {
 
     @Test
     public void testTooYoung() {
-        onView(withText(R.string.settings))
+        onView(withText("Settings"))
                 .perform(click());
 
         onView(withId(R.id.timeReminder)).perform(click());
@@ -335,7 +329,7 @@ public class SecondActivityTest {
 
     @Test
     public void testDBApply() {
-        onView(withText(R.string.settings))
+        onView(withText("Settings"))
                 .perform(click());
 
         closeSoftKeyboard();
