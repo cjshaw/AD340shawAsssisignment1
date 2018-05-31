@@ -72,6 +72,7 @@ public class SecondActivityTest {
     @Test
     public void setsRightMessageBasedOnIntentExtra() {
         MyConstants test = new MyConstants();
+        AppDatabaseSingleton test2 = new AppDatabaseSingleton();
 
         onView(withId(R.id.userAgeName))
                 .check(matches(withText("25,\t\tClint Shaw")));

@@ -6,6 +6,10 @@ import android.content.Context;
 public class AppDatabaseSingleton {
     private static AppDatabase db;
 
+    public AppDatabaseSingleton() {
+
+    }
+
     public static AppDatabase getDatabase(Context context) {
         if (db == null) {
             db = Room.databaseBuilder(context,

@@ -95,7 +95,6 @@ public class SettingTabFragment extends Fragment implements AdapterView.OnItemSe
         timeReminder.setAdapter(timeReminderAdapter);
 
         if (savedInstanceState != null) {
-            Log.v("myOnCreate", savedInstanceState.toString());
             timeReminder.setSelection(savedInstanceState.getInt("timeReminder"));
             gender.setSelection(savedInstanceState.getInt("gender"));
             maxDistance.setSelection(savedInstanceState.getInt("maxDistance"));
@@ -180,8 +179,6 @@ public class SettingTabFragment extends Fragment implements AdapterView.OnItemSe
         outState.putInt("timeReminder", timeReminder.getSelectedItemPosition());
         outState.putInt("gender", gender.getSelectedItemPosition());
         outState.putInt("maxDistance", maxDistance.getSelectedItemPosition());
-
-        Log.v("myBundle", outState.toString());
     }
 
     private static class SetSettingsTask extends AsyncTask<Void, Void, Settings> {
