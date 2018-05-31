@@ -259,9 +259,8 @@ public class SecondActivityTest {
                 .perform(scrollTo(), click());
 
         onView(withText(MyConstants.PEDO_MSG))
-                .check(matches(isDisplayed()))
-                .inRoot(isDialog())
-                .perform(click());
+                .check(matches(isDisplayed()));
+        onView(withText("OK")).perform(click());
     }
 
 

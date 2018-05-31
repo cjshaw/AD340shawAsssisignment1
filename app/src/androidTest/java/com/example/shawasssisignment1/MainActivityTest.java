@@ -323,9 +323,8 @@ public class MainActivityTest {
                 .perform(scrollTo(), click());
 
         onView(withText(MyConstants.DOB_MSG))
-                .check(matches(isDisplayed()))
-                .inRoot(isDialog())
-                .perform(click());
+                .check(matches(isDisplayed()));
+        onView(withText("OK")).perform(click());
 
     }
 
