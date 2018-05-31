@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Parcel;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
@@ -162,40 +163,8 @@ public class SecondActivityTest {
         //click like button
         onView(withId(R.id.my_recycler_view)).perform(
                 RecyclerViewActions.actionOnItemAtPosition(0, TestUtils.clickChildViewWithId(R.id.like_button)));
-//        //check toast text
-//        onView(withText("You liked Cool Guy Mike")).
-//                inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
-//                check(matches(isDisplayed()));
 
-//        onView(withId(R.id.my_recycler_view)).perform(
-//                RecyclerViewActions.actionOnItemAtPosition(1, TestUtils.clickChildViewWithId(R.id.like_button)));
-////        onView(withText("You liked Mark the King")).
-////                inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
-////                check(matches(isDisplayed()));
-//
-//        onView(withId(R.id.my_recycler_view)).perform(
-//                RecyclerViewActions.actionOnItemAtPosition(2, TestUtils.clickChildViewWithId(R.id.like_button)));
-////        onView(withText("You liked Overachiever Alex")).
-////                inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
-////                check(matches(isDisplayed()));
-//
-//        onView(withId(R.id.my_recycler_view)).perform(
-//                RecyclerViewActions.actionOnItemAtPosition(3, TestUtils.clickChildViewWithId(R.id.like_button)));
-////        onView(withText("You liked Iceman Judah")).
-////                inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
-////                check(matches(isDisplayed()));
-//
-//        onView(withId(R.id.my_recycler_view)).perform(
-//                RecyclerViewActions.actionOnItemAtPosition(4, TestUtils.clickChildViewWithId(R.id.like_button)));
-//        onView(withText("You liked Hayden the Wrestler")).
-//                inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
-//                check(matches(isDisplayed()));
 
-//        onView(withId(R.id.my_recycler_view)).perform(
-//                RecyclerViewActions.actionOnItemAtPosition(5, TestUtils.clickChildViewWithId(R.id.like_button)));
-//        onView(withText("You liked Money man Ben")).
-//                inRoot(withDecorView(not(activity.getWindow().getDecorView()))).
-//                check(matches(isDisplayed()));
     }
 
     @Test
@@ -215,39 +184,6 @@ public class SecondActivityTest {
                 .atPositionOnView(0, R.id.card_title))
                 .check(matches(withText("Cool Guy Mike")));
 
-//        onView(withRecyclerView(R.id.my_recycler_view)
-//                .atPositionOnView(0, R.id.card_image))
-//                .check(matches(isDisplayed()));
-
-//        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(1));
-//
-//        onView(withRecyclerView(R.id.my_recycler_view)
-//                .atPositionOnView(1, R.id.card_title))
-//                .check(matches(withText("Mark the King")));
-//
-//        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(2));
-//
-//        onView(withRecyclerView(R.id.my_recycler_view)
-//                .atPositionOnView(2, R.id.card_title))
-//                .check(matches(withText("Overachiever Alex")));
-//
-//        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(3));
-//
-//        onView(withRecyclerView(R.id.my_recycler_view)
-//                .atPositionOnView(3, R.id.card_title))
-//                .check(matches(withText("Iceman Judah")));
-//
-//        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(4));
-//
-//        onView(withRecyclerView(R.id.my_recycler_view)
-//                .atPositionOnView(4, R.id.card_title))
-//                .check(matches(withText("Hayden the Wrestler")));
-//
-//        onView(withId(R.id.my_recycler_view)).perform(scrollToPosition(5));
-//
-//        onView(withRecyclerView(R.id.my_recycler_view)
-//                .atPositionOnView(5, R.id.card_title))
-//                .check(matches(withText("Money man Ben")));
 
     }
 
@@ -379,6 +315,8 @@ public class SecondActivityTest {
         assertEquals(0, testMatches.describeContents());
         assertEquals("69.9", testMatches.getLatitude());
         assertEquals("22.5", testMatches.getLongitude());
+
+        testMatches.writeToParcel(Parcel.obtain(), 1);
     }
 
     @Test
