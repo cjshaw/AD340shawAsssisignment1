@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.shawasssisignment1.MainActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -25,21 +25,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_name"
-            android:inputType="textCapWords" />
+            android:inputType="textCapWords"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_below="@+id/header" />
 
         <EditText
             android:id="@+id/emailEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_email"
-            android:inputType="textWebEmailAddress" />
+            android:inputType="textWebEmailAddress"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_below="@+id/nameEdit" />
 
         <EditText
             android:id="@+id/occEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_occupation"
-            android:inputType="textCapWords" />
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_below="@+id/emailEdit" />
 
         <EditText
             android:id="@+id/descBox"
@@ -49,41 +57,64 @@
             android:inputType="textCapSentences|textMultiLine"
             android:maxLength="2000"
             android:maxLines="4"
-            android:scrollHorizontally="false" />
+            android:scrollHorizontally="false"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_below="@+id/occEdit" />
 
         <Button
             android:id="@+id/birthdayEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:background="@drawable/button_selector"
+            android:layout_width="150dp"
+            android:layout_height="55dp"
             android:hint="@string/birthday"
             android:inputType="none"
-            android:onClick="onDateClicked" />
+            android:onClick="onDateClicked"
+            android:layout_marginStart="25dp"
+            android:layout_below="@+id/descBox" />
 
         <Button
             android:id="@+id/savedImage"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:layout_width="150dp"
+            android:layout_height="55dp"
             android:hint="@string/get_image_from_camera_roll"
             android:onClick="imagePick"
-            android:padding="@dimen/image_pad" />
+            android:layout_marginEnd="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/descBox"
+            android:layout_toEndOf="@+id/birthdayEdit" />
 
-        <ImageView
-            android:id="@+id/selectedImg"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/profile_picture_height"
-            android:contentDescription="@string/profile_picture"
-            android:padding="10dp"
-            android:scaleType="fitCenter"
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/submitBtn"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onSubmit"
-            android:paddingTop="10dp"
-            android:text="@string/submit" />
+            android:layout_height="match_parent"
+            android:layout_below="@id/birthdayEdit"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/selectedImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/profile_picture"
+                android:paddingTop="15dp"
+                android:layout_margin="20dp"
+                android:scaleType="fitCenter"
+                android:visibility="gone" />
+
+            <Button
+                android:background="@drawable/button_selector"
+                android:id="@+id/submitBtn"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:onClick="onSubmit"
+                android:padding="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="25dp"
+                android:layout_marginStart="200dp"
+                android:gravity="center"
+                android:text="@string/submit" />
+        </LinearLayout>
+
+    </RelativeLayout>
 </ScrollView>

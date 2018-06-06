@@ -4,6 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/settingsTab"
+    android:layout_marginStart="25dp"
+    android:layout_marginEnd="25dp"
+    android:layout_marginBottom="25dp"
     tools:context="com.example.shawasssisignment1.SettingTabFragment">
 
     <LinearLayout
@@ -102,8 +105,12 @@
             android:padding="25dp" />
 
         <Button
-            android:layout_width="match_parent"
+            android:background="@drawable/button_selector"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="25dp"
+            android:layout_marginStart="100dp"
             android:id="@+id/applyBtn"
             android:text="@string/apply_changes"
             android:padding="25dp" />
