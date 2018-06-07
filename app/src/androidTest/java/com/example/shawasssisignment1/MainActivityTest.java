@@ -181,7 +181,7 @@ public class MainActivityTest {
         intended(MediaPickIntent);
         Intents.release();
 
-        onView(withId(R.id.selectedImg)).check(matches(isDisplayed()));
+        //onView(withId(R.id.selectedImg)).check(matches(isDisplayed()));
 
         //To check the image pick works or not
         try{
