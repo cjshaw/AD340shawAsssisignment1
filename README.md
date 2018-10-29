@@ -1,4 +1,4 @@
-# AD340shawAsssisignment1
+# AD340 Dating App
 repo for an Android dating application made for AD340 Mobile App Development
 
 [![codecov](https://codecov.io/gh/cjshaw/AD340shawAsssisignment1/branch/master/graph/badge.svg)](https://codecov.io/gh/cjshaw/AD340shawAsssisignment1)
